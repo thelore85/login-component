@@ -1,0 +1,30 @@
+#main{
+	position: relative;
+
+}
+
+#main .wrapper{
+	background-color: rgba(36, 36, 36, 0.057);
+	box-shadow: 1px 3px 6px rgba(42, 42, 42, 0.354);
+	max-width: 700px;
+	padding: 20px;
+	border-radius: 20px;
+
+}
+
+#main h1{
+	color:white;
+}
+
+#main input{
+	width:60%;
+	padding: 10px;
+	margin-right: 10px;
+	height: 38px;
+	border-radius: 7px;
+	border: solid rgb(170, 170, 170)
+}
+
+#main button{
+	width: 30%;
+}
