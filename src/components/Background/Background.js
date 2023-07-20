@@ -4,6 +4,8 @@ import Particles from "react-tsparticles";
 import { loadSlim } from "tsparticles-slim"; // if you are going to use `loadSlim`, install the "tsparticles-slim" package too.
 import Options from "./options.js";
 
+import './Background.css';
+
 
 const Background = () => {
 
