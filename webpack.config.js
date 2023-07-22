@@ -8,7 +8,12 @@ module.exports ={
 		filename: 'bundle.js',
 	},
 	devServer:{
-		port: 1985,
+    static: {
+      directory: path.join(__dirname, 'public'),
+    },
+    compress: true,
+    port: 9000,
+		hot: true,
 	},
 
 	plugins:[
