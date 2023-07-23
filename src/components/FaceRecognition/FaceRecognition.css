@@ -1,0 +1,10 @@
+#image-container{
+  margin: 40px auto;
+}
+
+#image-container img{
+  width: 80%;
+  border-radius: 10px;
+}
+
+

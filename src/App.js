@@ -3,18 +3,12 @@ import Menu from './components/Menu/Menu.js';
 import Main from './components/Main/Main.js';
 import Footer from './components/Footer/Footer.js';
 import Background from './components/Background/Background.js'
-// import Clarifai from 'clarifai';
 
 // css
 import './App.css';
 
-
-// //API clraify: configuration
-// const app = new Clarifai.App({
-// 	apiKey: '87a0584c90e64c87869205181c5b18a7',
-// });
-
-
+let searchInput = '';
+let searchUrl = '';
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // CLRAIFAI API NEW 
@@ -44,25 +38,40 @@ const requestOptions = {
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////    
 class App extends Component{
-onSearchClick = () => {
-  console.log('click')
-  
-  fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/outputs", requestOptions)
-  .then(response => {return response.text()})
-  .then(result => console.log('result:', result))
-  .catch(error => console.log('error', error)); // returning the prediction and the sqaure details
-}
+  constructor(){
+    super();
+    this.state = {
+      url: '',
+    }
+  }
 
-onInputChange = (event) => {
-	console.log('input change:', event.target.value);
-}
+  onSearchClick = () => {
+    console.log('click')
+    // searchUrl = searchInput;
+
+    this.setState({
+      url: searchInput,
+    })
+
+    // fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/outputs", requestOptions)
+    // .then(response => {return response.text()})
+    // .then(result => console.log('result:', result))
+    // .catch(error => console.log('error', error)); // returning the prediction and the sqaure details
+  
+    
+  }
+
+  onInputChange = (event) => {
+    searchInput = event.target.value;
+    console.log('input change:', searchInput);
+  }
 
 	render(){
 		return(
 			<div className='app-container'>
 				<Menu />
 				<Background />
-				<Main onSearchClick={this.onSearchClick} onInputChange={this.onInputChange}/>
+				<Main onSearchClick={this.onSearchClick} onInputChange={this.onInputChange} url={this.state.url}/>
 				<Footer />
 			</div>
 		)
