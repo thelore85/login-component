@@ -13,6 +13,7 @@ module.exports ={
     open: true,
     port: 9000,
     hot: true,
+    server: { type: 'http' }
 	},
 
 	plugins:[

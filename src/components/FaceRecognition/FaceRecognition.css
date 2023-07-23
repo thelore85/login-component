@@ -7,4 +7,21 @@
   border-radius: 10px;
 }
 
+#image-container{
+  position: relative;
+}
+
+#image-container .bounding-box{
+  position: absolute;
+  box-shadow: 0 0 3px #e600db inset;
+  display: flex;
+  display: -webkit-flex;
+  display: -md-flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  cursor: pointer;
+}
 

@@ -1,10 +1,11 @@
 import React from "react";
 import './FaceRecognition.css';
 
-const FaceRecognition = ({ url }) => {
+const FaceRecognition = ({ url, faceDetection }) => {
   return(
       <div id='image-container' className="wrapper">
-        <img alt="image" className="" src={url}/>
+        <img id="input-image" alt="image" className="" src={url} />
+        <div className="bounding-box" style={{ top: faceDetection.topRow, right: faceDetection.rightCol , bottom: faceDetection.bottomRow, left: faceDetection.leftCol }}></div>
       </div>
     )
 }
