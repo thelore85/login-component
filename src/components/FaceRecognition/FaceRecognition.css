@@ -3,7 +3,7 @@
 }
 
 #image-container img{
-  width: 80%;
+  width: 100%;
   border-radius: 10px;
 }
 
@@ -13,7 +13,8 @@
 
 #image-container .bounding-box{
   position: absolute;
-  box-shadow: 0 0 3px #e600db inset;
+  border: solid  3px rgb(144, 0, 255);
+  box-shadow : 1px 1px 2px #e600db3e inset;
   display: flex;
   display: -webkit-flex;
   display: -md-flex;

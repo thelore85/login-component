@@ -57,34 +57,41 @@ class App extends Component{
   }
 
   calculateFaceBox = (predictionObj) => {
-    console.log("box coordinates:", coordinates)
 
     const coordinates = predictionObj.outputs[0].data.regions[0].region_info.bounding_box;
     const image = document.getElementById('input-image');
     const width = Number(image.width);
     const height = Number(image.height);
+    const left = coordinates.left_col * width;
+    const right = coordinates.right_col * width;
+    const top = coordinates.top_row * height;
+    const bottom = coordinates.bottom_row * height;
+    const boxWidth = (right-left); 
+    const boxHeight = (bottom-top);
 
-    console.log('width:', image.width)
-    console.log('input height:', image.height)
+
+    console.log('image width:', image.width);
+    console.log('image height:', image.height);
+    console.log('box width:', boxWidth);
+    console.log('box height:', boxHeight);
+  
 
     return { //return 'box' for 'faceDEtection' function;
 
-      // left: coordinates.left_col * (width),
-      // right: width - (coordinates.right_col * width),
-      // top: (coordinates.top_row * height),
-      // bottom: height - (coordinates.bottom_row * height),
+      left: coordinates.left_col * (width),
+      right: width - (coordinates.right_col * width),
+      top: (coordinates.top_row * height),
+      bottom: height - (coordinates.bottom_row * height),
       
-    //fix top-left corner of the square  
-      left: coordinates.left_col * width,
-      right: coordinates.right_col * width,
-      top: coordinates.top_row * height,
-      bottom: coordinates.bottom_row * height,
+    //pass face coordinates
+      // left: coordinates.left_col * width,
+      // right: coordinates.right_col * width,
+      // top: coordinates.top_row * height,
+      // bottom: coordinates.bottom_row * height,
       
-      // in %, full width - left+right  = [100% - (20%+20%)] = 60%
-      width: 100 - (left+right), 
-      
-      // in %, full height - top+bottom  = [100% - (40%+40%)] = 20%
-      height: 100 - (top+bottom),
+      // calculate box dimention
+      width: right-left,       // in %, right-left  = (60%-30%) = 30% 
+      height: bottom-top,      // in %, bottom-top  = (80%-60%) = 20%
 
     }
   }
