@@ -2,7 +2,7 @@ import React from 'react';
 import FaceRecognition from '../FaceRecognition/FaceRecognition.js';
 import './Main.css';
 
-const Main = ({ onSearchClick, onInputChange, url, faceDetection }) => {
+const Main = ({ onSearchClick, onInputChange, url, box }) => {
 	return(
 		<section id="main">
 				<h1>Face identification</h1>
@@ -11,7 +11,7 @@ const Main = ({ onSearchClick, onInputChange, url, faceDetection }) => {
 					<input className="input" type="search" onChange={onInputChange}></input>
 					<button type="button" className="btn btn-primary" onClick={onSearchClick}><i className="fas fa-search"></i></button>           
 				</div>
-        <FaceRecognition url={url} faceDetection={faceDetection}/>
+        <FaceRecognition url={url} box={box}/>
 		</section>
 	)
 }

@@ -22,7 +22,7 @@ class App extends Component{
     super();
     this.state = {
       url: '',
-      faceDetection: {},
+      boxCoordinates: {},
     }
   }
 
@@ -43,22 +43,23 @@ class App extends Component{
 
      fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/outputs", requestOptions)
       .then(response => {return response.text()})
-      .then(result => this.faceDetection((this.calculateFaceBox(JSON.parse(result).outputs[0].data.regions[0].region_info.bounding_box))))
+      .then(result => this.faceDetection((this.calculateFaceBox(JSON.parse(result)))))
       .catch(error => console.log('error', error)); // returning the prediction and the sqaure details
    
   }
 
-  faceDetection = (detectionBoxStyle) => {
-    console.log('faceDetStyle:', detectionBoxStyle)
+  faceDetection = (box) => {
+    console.log('faceDetStyle:', box)
 
     this.setState({
-      faceDetection : detectionBoxStyle,
+      boxCoordinates: box,
     })
   }
 
-  calculateFaceBox = (coordinates) => {
+  calculateFaceBox = (predictionObj) => {
     console.log("box coordinates:", coordinates)
 
+    const coordinates = predictionObj.outputs[0].data.regions[0].region_info.bounding_box;
     const image = document.getElementById('input-image');
     const width = Number(image.width);
     const height = Number(image.height);
@@ -66,15 +67,27 @@ class App extends Component{
     console.log('width:', image.width)
     console.log('input height:', image.height)
 
-    return { //detctionBoxStyle for faceDEtection function
-      leftCol: coordinates.left_col * (width),
-      rightCol: width - (coordinates.right_col * width),
-      topRow: (coordinates.top_row * height),
-      bottomRow: height - (coordinates.bottom_row * height),
+    return { //return 'box' for 'faceDEtection' function;
+
+      // left: coordinates.left_col * (width),
+      // right: width - (coordinates.right_col * width),
+      // top: (coordinates.top_row * height),
+      // bottom: height - (coordinates.bottom_row * height),
+      
+    //fix top-left corner of the square  
+      left: coordinates.left_col * width,
+      right: coordinates.right_col * width,
+      top: coordinates.top_row * height,
+      bottom: coordinates.bottom_row * height,
+      
+      // in %, full width - left+right  = [100% - (20%+20%)] = 60%
+      width: 100 - (left+right), 
+      
+      // in %, full height - top+bottom  = [100% - (40%+40%)] = 20%
+      height: 100 - (top+bottom),
+
     }
   }
-
-
 
   onInputChange = (event) => {
     this.setState({
@@ -87,7 +100,7 @@ class App extends Component{
 			<div className='app-container'>
 				<Menu />
 				<Background />
-				<Main onSearchClick={this.onSearchClick} onInputChange={this.onInputChange} url={this.state.url} faceDetection={this.state.faceDetection}/>
+				<Main onSearchClick={this.onSearchClick} onInputChange={this.onInputChange} url={this.state.url} box={this.state.boxCoordinates}/>
 				<Footer />
 			</div>
 		)
