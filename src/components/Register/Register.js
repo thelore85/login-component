@@ -46,6 +46,13 @@ const Register = ({ onRouteChange }) => {
 				 	    <button type="button" name="button" className="btn login_btn" onClick={() => onRouteChange('home')}>Register Now</button>
 				   </div>
 
+           <div className="mt-4">
+					<div className="d-flex justify-content-center links">
+				  	<span className="plain-text">Already an account?</span>
+            <a href="#" onClick={() => onRouteChange('signin')}className="ml-2">Log In Now</a>
+					</div>
+				</div>
+
 					</form>
 				</div>
 

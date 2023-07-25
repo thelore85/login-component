@@ -10,10 +10,6 @@ import Register from './components/Register/Register.js';
 // css
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css';
-import { SSRProvider } from 'react-bootstrap';
-
-//global variables
-
 
 // CLRAIFAI API NEW 
 const PAT = '87a0584c90e64c87869205181c5b18a7';
@@ -33,7 +29,7 @@ class App extends Component{
       url: '',
       boxCoordinates: {},
       route: 'signin',
-      isSignIn: 'false',
+      isSignIn: false,
     }
   }
 
@@ -106,13 +102,13 @@ class App extends Component{
   };
 
   onRouteChange = (route) => {
-    if(route === 'signin'){
+    if(route === 'signin' || route === 'register'){
       this.setState({
-        isSignIn: 'false'
+        isSignIn: false // do not show log out
       })
-    }else if(route === 'home'){
+    }else{
       this.setState({
-        isSignIn: 'true'
+        isSignIn: true // show log out
       })
     }
 
