@@ -7,6 +7,11 @@
 	font-weight: 200;
 }
 
+a{
+  color:rgb(237, 0, 118);
+  text-decoration: none;
+  font-weight: 400;
+}
 
 h1{
 	font-family: 'Baloo 2', cursive;

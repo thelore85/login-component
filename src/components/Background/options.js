@@ -46,7 +46,7 @@ const Options = {
                 default: "bounce",
             },
             random: false,
-            speed: 4,
+            speed: 1,
             straight: false,
         },
         number: {
