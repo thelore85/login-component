@@ -1,0 +1,11 @@
+/* LOGO  */
+#logo.logo{
+  font-size: 25px;
+  font-weight: 400;
+}
+
+#logo i{
+  margin-right: 15px;
+  font-size: 35px;
+  color: var(--secundary);
+}

@@ -43,6 +43,7 @@ const Signin = ({ onRouteChange }) => {
             <a href="#" onClick={() => onRouteChange('register')}className="ml-2">Register Now</a>
 					</div>
 				</div>
+
 			</div>
 		</div>
 	</div>
