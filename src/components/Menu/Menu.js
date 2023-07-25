@@ -4,7 +4,9 @@ import './Menu.css';
 
 
 const Menu = ({ onRouteChange, isSignIn }) => {
-  if(isSignIn){//show menu after login
+  
+  //CUSTOMER NAVIGATION
+  if(isSignIn){
     return(
       <section id="menu">
         <div className="wrapper">
@@ -18,7 +20,9 @@ const Menu = ({ onRouteChange, isSignIn }) => {
         </div>
       </section>
     )
-  } else {// show this menu if not logged yet
+    
+  // PROSPECT NAVIGATION
+  } else {
     return(
       <section id="menu">
         <div className="wrapper">
