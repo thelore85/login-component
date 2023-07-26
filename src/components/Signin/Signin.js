@@ -19,7 +19,7 @@ const Signin = ({ onRouteChange }) => {
 					<form>
 						<div className="input-group mb-3">
 							<div className="input-group-append">
-								<span className="input-group-text"><i class="fa-solid fa-envelope"></i></span>
+								<span className="input-group-text"><i className="fa-solid fa-envelope"></i></span>
 							</div>
 							<input type="text" name="" className="form-control input_user" placeholder="email"/>
 						</div>
@@ -40,7 +40,7 @@ const Signin = ({ onRouteChange }) => {
 				<div className="mt-4">
 					<div className="d-flex justify-content-center links">
 				  	<span className="plain-text">No Account?</span>
-            <a href="#" onClick={() => onRouteChange('register')}className="ml-2">Register Now</a>
+            <a href="#" onClick={() => onRouteChange('register')} className="ml-2">Register Now</a>
 					</div>
 				</div>
 

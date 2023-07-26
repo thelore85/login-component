@@ -6,10 +6,12 @@ import Background from './components/Background/Background.js'
 import Signin from './components/Signin/Signin.js';
 import Register from './components/Register/Register.js';
 
-
 // css
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css';
+
+//global var
+let input = '';
 
 // CLRAIFAI API NEW 
 const PAT = '87a0584c90e64c87869205181c5b18a7';
@@ -18,7 +20,6 @@ const APP_ID = 'biometrics';
 const MODEL_ID = 'face-detection';
 let IMAGE_URL = '';
  
-
 ///////////////////////////////////////////////
 // start component////////////////////////////
 
@@ -34,9 +35,12 @@ class App extends Component{
   }
 
   onSearchClick = () => {
-   
-    // set api variables
-    IMAGE_URL = this.state.url;
+
+      this.setState({
+        url: IMAGE_URL
+      })
+    
+    // set clarifai api variables
 
     const raw = JSON.stringify({
       "user_app_id": { "user_id": USER_ID, "app_id": APP_ID},
@@ -73,14 +77,6 @@ class App extends Component{
     const right = coordinates.right_col * width;
     const top = coordinates.top_row * height;
     const bottom = coordinates.bottom_row * height;
-    const boxWidth = (right-left); 
-    const boxHeight = (bottom-top);
-
-
-    console.log('image width:', image.width);
-    console.log('image height:', image.height);
-    console.log('box width:', boxWidth);
-    console.log('box height:', boxHeight);
   
     //return 'box' for 'faceDEtection' function;
     return { 
@@ -96,23 +92,27 @@ class App extends Component{
   }
 
   onInputChange = (event) => {
-    this.setState({
-      url: event.target.value,
-    })
+    IMAGE_URL = event.target.value;
   };
 
+  //ROUTING management
   onRouteChange = (route) => {
+
+    //GET route parameter (click interaction)
+    this.setState({ 
+      route: route
+    })
+
+    // assign isSignIn state based on route parameter (click interaction)
     if(route === 'signin' || route === 'register'){
       this.setState({
-        isSignIn: false // do not show log out
+        isSignIn: false
       })
     }else{
       this.setState({
-        isSignIn: true // show log out
+        isSignIn: true
       })
     }
-
-    this.setState({ route: route})
   }
 
   // RENDER THE COMPONENT

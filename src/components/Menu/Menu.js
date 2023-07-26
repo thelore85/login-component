@@ -14,7 +14,7 @@ const Menu = ({ onRouteChange, isSignIn }) => {
 
           <div className="links">
             <a href='#'>Menu</a>
-            <i class="fa-solid fa-user" onClick={() => onRouteChange('signin')}></i> 
+            <i className="fa-solid fa-user" onClick={() => onRouteChange('signin')}></i> 
           </div>
 
         </div>
