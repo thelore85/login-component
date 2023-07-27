@@ -35,7 +35,6 @@ class App extends Component{
   }
 
   onSearchClick = () => {
-
       this.setState({
         url: IMAGE_URL
       })
