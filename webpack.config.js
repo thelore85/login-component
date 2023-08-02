@@ -11,7 +11,7 @@ module.exports ={
 	devServer:{
     compress: true,
     open: true,
-    port: 2001,
+    port: 3000,
     hot: true,
     server: { type: 'http' }
 	},
