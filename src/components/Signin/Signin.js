@@ -25,9 +25,6 @@ class Signin extends Component {
   }
 
   onSubmitSignin = () => {
-    // console.log( this.state.signInEmail)
-    // console.log( this.state.signInPsw)
-
     fetch('http://localhost:9000/signin',
     {
       method: 'post',
