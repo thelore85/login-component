@@ -145,7 +145,7 @@ class App extends Component{
           ? <Main onSearchClick={this.onSearchClick} onInputChange={this.onInputChange} url={this.state.url} box={this.state.boxCoordinates}/>
           : (
             this.state.route === 'signin'
-            ?<Signin onRouteChange={this.onRouteChange}/>
+            ?<Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
             :<Register loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
           )
         }

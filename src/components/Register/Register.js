@@ -13,7 +13,6 @@ class Register extends Component {
     }
   }
 
-
   onEmailInput = (event) => {
     this.setState({
       email: event.target.value
@@ -34,31 +33,30 @@ class Register extends Component {
 
 
   onSubmit = () => {
- 
-    fetch('http://localhost:9000/register',
-    {
-      method: 'post',
-      headers: {'Content-Type' : 'application/json'},
-      body: JSON.stringify({
-        email: this.state.email,
-        password: this.state.password,
-        name: this.state.name
-       })
+    
+    // check if form is complete
+    if(this.state.email && this.state.name && this.state.password){
+
+      //call the server push request
+      fetch('http://localhost:9000/register',
+      {
+        method: 'post',
+        headers: {'Content-Type' : 'application/json'},
+        body: JSON.stringify({
+          email: this.state.email,
+          password: this.state.password,
+          name: this.state.name
+        })
+        })
+      .then(response => response.json())
+      .then(user => {
+        if(user.id){
+          this.props.onRouteChange('home');
+          this.props.loadUser(user);
+        }
+        else{console.log('error registration')}
       })
-    .then(response => response.json())
-    .then(user => {
-      if(user){
-        this.props.onRouteChange('home');
-        this.props.loadUser(user);
-      }
-      else{console.log('error registration')}
-    })
-
-
-
-    //> IF resp. OK => rute user to "home" 
-
-    // onRouteChange('home')
+    }
 
   }
 
