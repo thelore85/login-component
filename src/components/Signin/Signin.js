@@ -36,7 +36,8 @@ class Signin extends Component {
       })
     .then(response => response.json())
     .then(data => {
-      if(data === 'success'){this.props.onRouteChange('home')}
+      if(data === 'success'){
+        this.props.onRouteChange('home')}
       else{console.log('error log in')}
     })
   }

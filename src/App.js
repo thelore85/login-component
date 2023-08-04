@@ -31,6 +31,14 @@ class App extends Component{
       boxCoordinates: {},
       route: 'signin',
       isSignIn: false,
+      user: {
+          id: '',
+          name: '',
+          email: '',
+          entries: 0,
+          joined: '',
+        }
+      
     }
   }
 
@@ -114,8 +122,21 @@ class App extends Component{
     }
   }
 
+  loadUser = (data) => {
+    this.setState({
+      user: {
+        id: data.id,
+        name: data.name,
+        email: data.email,
+        entries: data.entries,
+        joined: data.joined,
+      }  
+    })
+  }
+
   // RENDER THE COMPONENT
 	render(){
+    console.log('user', this.state.user)
 		return(
 			<div className='app-container'>
 				<Menu onRouteChange={this.onRouteChange} isSignIn={this.state.isSignIn} />
@@ -125,7 +146,7 @@ class App extends Component{
           : (
             this.state.route === 'signin'
             ?<Signin onRouteChange={this.onRouteChange}/>
-            :<Register onRouteChange={this.onRouteChange} />
+            :<Register loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
           )
         }
 				  <Footer />

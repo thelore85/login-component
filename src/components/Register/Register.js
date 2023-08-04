@@ -13,14 +13,13 @@ class Register extends Component {
     }
   }
 
-  // onEmailInput
+
   onEmailInput = (event) => {
     this.setState({
       email: event.target.value
     })
   }
 
-  //onPswInput
   onPswInput = (event) => {
     this.setState({
       password: event.target.value
@@ -33,11 +32,8 @@ class Register extends Component {
     })
   }
 
-  ///onSubmit
-  onSubmit = () => {
 
-    console.log('submit click')
-    console.log('state', this.state)
+  onSubmit = () => {
  
     fetch('http://localhost:9000/register',
     {
@@ -50,8 +46,11 @@ class Register extends Component {
        })
       })
     .then(response => response.json())
-    .then(data => {
-      if(data){this.props.onRouteChange('home')}
+    .then(user => {
+      if(user){
+        this.props.onRouteChange('home');
+        this.props.loadUser(user);
+      }
       else{console.log('error registration')}
     })
 
@@ -90,7 +89,7 @@ class Register extends Component {
 
                   <div className="input-group mb-3">
                     <div className="input-group-append">
-                      <span className="input-group-text"><i class="fa-solid fa-envelope"></i></span>
+                      <span className="input-group-text"><i className="fa-solid fa-envelope"></i></span>
                     </div>
                     <input type="text" name="" className="form-control input_user" placeholder="email" onChange={this.onEmailInput}/>
                   </div>
