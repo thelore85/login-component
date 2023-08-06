@@ -108,7 +108,7 @@ class Register extends Component {
                 <div className="mt-4">
                 <div className="d-flex justify-content-center links">
                   <span className="plain-text">Already an account?</span>
-                  <a href="#" onClick={() => onRouteChange('signin')}className="ml-2">Log In Now</a>
+                  <a href="#" onClick={() => this.props.onRouteChange('signin')}className="ml-2">Log In Now</a>
                 </div>
               </div>
 

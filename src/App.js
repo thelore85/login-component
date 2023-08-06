@@ -142,7 +142,7 @@ class App extends Component{
 				<Menu onRouteChange={this.onRouteChange} isSignIn={this.state.isSignIn} />
 				<Background />
         { this.state.route === 'home'
-          ? <Main onSearchClick={this.onSearchClick} onInputChange={this.onInputChange} url={this.state.url} box={this.state.boxCoordinates}/>
+          ? <Main user={this.state.user} onSearchClick={this.onSearchClick} onInputChange={this.onInputChange} url={this.state.url} box={this.state.boxCoordinates}/>
           : (
             this.state.route === 'signin'
             ?<Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
