@@ -31,13 +31,13 @@ class Register extends Component {
     })
   }
 
-
   onSubmit = () => {
-    
     // check if form is complete
     if(this.state.email && this.state.name && this.state.password){
 
-      //call the server push request
+
+      ////////////////////////////////////////////////////////
+      //send register data to the server -> return user info -> upload app.js state
       fetch('http://localhost:9000/register',
       {
         method: 'post',
@@ -47,7 +47,7 @@ class Register extends Component {
           password: this.state.password,
           name: this.state.name
         })
-        })
+      })
       .then(response => response.json())
       .then(user => {
         if(user.id){
@@ -56,8 +56,45 @@ class Register extends Component {
         }
         else{console.log('error registration')}
       })
-    }
+      
 
+    //////////////////////////////////////////
+    //send login input data -> return user info -> updata app.js state
+    fetch('http://localhost:9000/session-post',
+    {
+      method: 'post',
+      headers: {'Content-Type' : 'application/json'},
+      body: JSON.stringify({
+        email: this.state.email,
+        })
+      })
+    .then(session => console.log('session post: ', session[0]))
+
+
+    //////////////////////////////////////
+    //session get request -> update last session data and return it
+    fetch('http://localhost:9000/session-update',
+      {
+      method: 'put',
+      headers: {'Content-Type' : 'application/json'},
+      body: JSON.stringify({
+        email: this.state.email, //check if session exist for this email
+        last_login : new Date,
+        img_search: this.props.img_search,
+        entries: this.props.entries
+        })
+      })
+    .then(response => response.json())
+    .then(session => {
+      if(session.email){
+        this.props.loadSession(session)}
+      else{console.log('session load: error')}
+    })
+
+
+
+
+    }
   }
 
 

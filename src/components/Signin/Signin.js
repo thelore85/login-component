@@ -25,6 +25,9 @@ class Signin extends Component {
   }
 
   onSubmitSignin = () => {
+
+    //////////////////////////////////////////
+    //send login input data -> return user info -> updata app.js state
     fetch('http://localhost:9000/signin',
     {
       method: 'post',
@@ -39,11 +42,26 @@ class Signin extends Component {
       if(user.id){
         this.props.loadUser(user);
         this.props.onRouteChange('home')}
-      else{console.log('error')}
     })
+    
+
+    //////////////////////////////////////
+    //send user email ->  respond with last session data associated -> updatea app.js state
+    fetch('http://localhost:9000/session-load',
+      {
+      method: 'put',
+      headers: {'Content-Type' : 'application/json'},
+      body: JSON.stringify({
+        email: this.state.signInEmail, //check if session exist for this email
+        })
+      })
+    .then(response => response.json())
+    .then(session => {
+      if(session.email){this.props.loadSession(session)}
+    })
+
   }
   
-
   render(){
 
     return(

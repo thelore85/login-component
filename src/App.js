@@ -35,20 +35,29 @@ class App extends Component{
           id: '',
           name: '',
           email: '',
-          entries: 0,
-          joined: '',
-        }
-      
+          joined: ''
+        },
+      session: {
+        email: '',
+        entries: 0,
+        sessions: 0,
+        last_login: new Date,
+        img_search: ''
+      }
     }
   }
 
-  onSearchClick = () => {
-      this.setState({
-        url: IMAGE_URL
-      })
-    
-    // set clarifai api variables
+  /////////////////////////////////
+  // START IMAGE RECOGNITION
 
+  onSearchClick = () => {
+
+    //update state with image info
+    this.setState({
+      url: IMAGE_URL,
+    })
+  
+    // set clarifai api variables
     const raw = JSON.stringify({
       "user_app_id": { "user_id": USER_ID, "app_id": APP_ID},
       "inputs": [{ "data": { "image": {"url": IMAGE_URL}}}]
@@ -64,8 +73,47 @@ class App extends Component{
      fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/outputs", requestOptions)
       .then(response => {return response.text()})
       .then(result => this.faceDetection((this.calculateFaceBox(JSON.parse(result)))))
-      .catch(error => console.log('error', error)); // returning the prediction and the sqaure details
+      .then(console.log)
+      .catch(error => console.log('Api load error', error)); // returning the prediction and the sqaure details
+
+      
+      this.setSession();
   }
+
+
+
+
+  //////////////////////////////
+  // push Session to the db
+  setSession = () => {
+
+    this.setState({
+      session: {
+        ...this.state.session,
+        img_serch: IMAGE_URL,
+        entries: Number(this.state.session.entries) + 1
+      }
+    })
+
+      console.log('setSession start:', this.state.session)
+      
+    fetch('http://localhost:9000/session-update',
+      {
+        method: 'put',
+        headers: {'Content-Type' : 'application/json'},
+        body: JSON.stringify({
+          email: this.state.user.email,
+          last_login: new Date,
+          img_search: IMAGE_URL,
+          entries: this.state.session.entries++
+        })
+      })
+      .then(console.log)
+  }
+
+
+
+
 
   // set state with face box coordinates
   faceDetection = (box) => { 
@@ -122,22 +170,47 @@ class App extends Component{
     }
   }
 
+  //get data from register component and push to state
   loadUser = (data) => {
     this.setState({
       user: {
         id: data.id,
         name: data.name,
         email: data.email,
-        entries: data.entries,
-        joined: data.joined,
+        joined: data.data_creation,
+        sessions: data.sessions
       }  
+    });
+  }
+
+  //get data from signin/register component and push to state - OK
+  loadSession = (data) => {
+    this.setState({
+      session: {
+        email: data.email,
+        entries: data.entries,
+        last_login: data.last_login,
+        img_serch: data.img_search
+      }
     })
   }
 
+
+
+  ///////////////////////////////////
+  // on load page
+  componentDidMount(){
+  
+  }
+
+
+
   // RENDER THE COMPONENT
 	render(){
-    console.log('user', this.state.user)
+    console.log( 'user:', this.state.user.name)
+    console.log( 'session:', this.state.session.email)
 		return(
+      
 			<div className='app-container'>
 				<Menu onRouteChange={this.onRouteChange} isSignIn={this.state.isSignIn} />
 				<Background />
@@ -145,8 +218,8 @@ class App extends Component{
           ? <Main user={this.state.user} onSearchClick={this.onSearchClick} onInputChange={this.onInputChange} url={this.state.url} box={this.state.boxCoordinates}/>
           : (
             this.state.route === 'signin'
-            ?<Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
-            :<Register loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
+            ?<Signin loadUser={this.loadUser} loadSession={this.loadSession} onRouteChange={this.onRouteChange}/>
+            :<Register loadUser={this.loadUser} loadSession={this.loadSession} onRouteChange={this.onRouteChange} />
           )
         }
 				  <Footer />
