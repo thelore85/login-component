@@ -21,8 +21,12 @@ const MODEL_ID = 'face-detection';
 let IMAGE_URL = '';
  
 ///////////////////////////////////////////////
-// start component////////////////////////////
+////////---------COMPONENT ------------////////
+///////////////////////////////////////////////
 
+
+///////////////////////////////////
+// Constructor
 class App extends Component{
   constructor(){
     super();
@@ -48,8 +52,7 @@ class App extends Component{
   }
 
   /////////////////////////////////
-  // START IMAGE RECOGNITION
-
+  // API call: Image recognition
   onSearchClick = () => {
 
     //update state with image info
@@ -80,9 +83,6 @@ class App extends Component{
       this.setSession();
   }
 
-
-
-
   //////////////////////////////
   // push Session to the db
   setSession = () => {
@@ -111,10 +111,7 @@ class App extends Component{
       .then(console.log)
   }
 
-
-
-
-
+  ////////////////////////////////
   // set state with face box coordinates
   faceDetection = (box) => { 
     this.setState({
@@ -195,15 +192,10 @@ class App extends Component{
     })
   }
 
-
-
   ///////////////////////////////////
   // on load page
-  componentDidMount(){
-  
+  componentDidMount(){  
   }
-
-
 
   // RENDER THE COMPONENT
 	render(){
@@ -215,7 +207,7 @@ class App extends Component{
 				<Menu onRouteChange={this.onRouteChange} isSignIn={this.state.isSignIn} />
 				<Background />
         { this.state.route === 'home'
-          ? <Main user={this.state.user} onSearchClick={this.onSearchClick} onInputChange={this.onInputChange} url={this.state.url} box={this.state.boxCoordinates}/>
+          ? <Main user={this.state.user} session={this.state.session} onSearchClick={this.onSearchClick} onInputChange={this.onInputChange} url={this.state.url} box={this.state.boxCoordinates}/>
           : (
             this.state.route === 'signin'
             ?<Signin loadUser={this.loadUser} loadSession={this.loadSession} onRouteChange={this.onRouteChange}/>
