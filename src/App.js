@@ -44,9 +44,10 @@ class App extends Component{
       session: {
         email: '',
         entries: 0,
-        sessions: 0,
+        sessions: 1,
         last_login: new Date,
-        img_search: ''
+        img_search: ['maker your fist img detection!'],
+        sessions: 0
       }
     }
   }
@@ -79,24 +80,31 @@ class App extends Component{
       .then(console.log)
       .catch(error => console.log('Api load error', error)); // returning the prediction and the sqaure details
 
-      
       this.setSession();
-  }
+    }
+    
+    //////////////////////////////
+    // push Session to the db
+    setSession = () => {
+    
+    // delate last img in the array
+    if(this.state.session.img_search.length >=10){
+      this.state.session.img_search.pop();
+    }
 
-  //////////////////////////////
-  // push Session to the db
-  setSession = () => {
+    // add img to state session img_search array
+    this.state.session.img_search.unshift(IMAGE_URL); 
 
+    //update session state
     this.setState({
       session: {
         ...this.state.session,
-        img_serch: IMAGE_URL,
         entries: Number(this.state.session.entries) + 1
       }
     })
 
-      console.log('setSession start:', this.state.session)
-      
+
+    //send the new session state to the db
     fetch('http://localhost:9000/session-update',
       {
         method: 'put',
@@ -104,7 +112,7 @@ class App extends Component{
         body: JSON.stringify({
           email: this.state.user.email,
           last_login: new Date,
-          img_search: IMAGE_URL,
+          img_search: this.state.session.img_search,
           entries: this.state.session.entries++
         })
       })
@@ -187,7 +195,7 @@ class App extends Component{
         email: data.email,
         entries: data.entries,
         last_login: data.last_login,
-        img_serch: data.img_search
+        img_search: data.img_search
       }
     })
   }
@@ -199,8 +207,8 @@ class App extends Component{
 
   // RENDER THE COMPONENT
 	render(){
-    console.log( 'user:', this.state.user.name)
-    console.log( 'session:', this.state.session.email)
+    // console.log( 'user:', this.state.user)
+    // console.log( 'session:', this.state.session)
 		return(
       
 			<div className='app-container'>

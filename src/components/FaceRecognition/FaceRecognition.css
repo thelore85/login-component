@@ -11,6 +11,13 @@
   position: relative;
 }
 
+#image-container.wrapper-img{
+	width: 100%;
+	max-width: 700px;
+	margin: auto;
+  margin-top: 30px;
+}
+
 #image-container .bounding-box{
   position: absolute;
   border: solid  3px rgb(144, 0, 255);

@@ -27,7 +27,7 @@ class Signin extends Component {
   onSubmitSignin = () => {
 
     //////////////////////////////////////////
-    //send login input data -> return user info -> updata app.js state
+    //CHECK USER: send login input data -> return user info -> updata app.js state.user
     fetch('http://localhost:9000/signin',
     {
       method: 'post',
@@ -46,7 +46,7 @@ class Signin extends Component {
     
 
     //////////////////////////////////////
-    //send user email ->  respond with last session data associated -> updatea app.js state
+    //LOAD SESSION: send user email ->  respond with last session data associated -> updatea app.js state.session
     fetch('http://localhost:9000/session-load',
       {
       method: 'put',
@@ -57,7 +57,9 @@ class Signin extends Component {
       })
     .then(response => response.json())
     .then(session => {
-      if(session.email){this.props.loadSession(session)}
+      if(session.email){
+        this.props.loadSession(session)
+      }
     })
 
   }

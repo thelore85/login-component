@@ -27,3 +27,18 @@
 #main button{
 	width: 30%;
 }
+
+#main .session{
+  width: 100%;
+  max-width: 700px;
+  margin: 40px auto;
+  background: white;
+  border-radius: 20px;
+  font-size: 12px;
+  text-align: left;
+  padding: 30px;
+}
+
+#main .session p{
+  margin-bottom: 5px;
+}

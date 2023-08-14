@@ -37,7 +37,7 @@ class Register extends Component {
 
 
       ////////////////////////////////////////////////////////
-      //send register data to the server -> return user info -> upload app.js state
+      //CREATE NEW USER RECORD -> return user info -> upload app.js state.user
       fetch('http://localhost:9000/register',
       {
         method: 'post',
@@ -50,40 +50,29 @@ class Register extends Component {
       })
       .then(response => response.json())
       .then(user => {
-        if(user.id){
+        if(user.id){ //check if db respond with a user --> user exist
           this.props.onRouteChange('home');
           this.props.loadUser(user);
         }
-        else{console.log('error registration')}
+        else{console.log('ALERT: registration data not valid')}
       })
+      .catch(err => console.log('ERROR: front-end /register error in register component'))
       
 
     //////////////////////////////////////////
-    //send login input data -> return user info -> updata app.js state
+    //CRAETE NEW SESSION RECORD -> return session info -> updata app.js state.session
     fetch('http://localhost:9000/session-post',
     {
       method: 'post',
       headers: {'Content-Type' : 'application/json'},
       body: JSON.stringify({
         email: this.state.email,
-        })
-      })
-    .then(session => console.log('session post: ', session[0]))
-
-
-    //////////////////////////////////////
-    //session get request -> update last session data and return it
-    fetch('http://localhost:9000/session-update',
-      {
-      method: 'put',
-      headers: {'Content-Type' : 'application/json'},
-      body: JSON.stringify({
-        email: this.state.email, //check if session exist for this email
         last_login : new Date,
-        img_search: this.props.img_search,
-        entries: this.props.entries
-        })
+        img_search: [],
+        entries: 0,
+        sessions: 1
       })
+    })
     .then(response => response.json())
     .then(session => {
       if(session.email){
@@ -91,6 +80,27 @@ class Register extends Component {
       else{console.log('session load: error')}
     })
 
+
+
+    // //////////////////////////////////////
+    // //session get request -> update last session data and return it
+    // fetch('http://localhost:9000/session-update',
+    //   {
+    //   method: 'put',
+    //   headers: {'Content-Type' : 'application/json'},
+    //   body: JSON.stringify({
+    //     email: this.state.email,
+    //     last_login : new Date,
+    //     img_search: this.props.img_search,
+    //     entries: this.props.entries
+    //     })
+    //   })
+    // .then(response => response.json())
+    // .then(session => {
+    //   if(session.email){
+    //     this.props.loadSession(session)}
+    //   else{console.log('session load: error')}
+    // })
 
 
 
