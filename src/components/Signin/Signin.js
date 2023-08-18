@@ -24,6 +24,8 @@ class Signin extends Component {
     })
   }
 
+
+  //USER INTERACTION: signin 
   onSubmitSignin = () => {
 
     //////////////////////////////////////////
@@ -40,13 +42,18 @@ class Signin extends Component {
     .then(response => response.json())
     .then(user => {
       if(user.id){
+        this.props.resetState();
         this.props.loadUser(user);
-        this.props.onRouteChange('home')}
+        this.sessionCall();
+      }
     })
     
+  }
+  
+  /////////////////////////////////////
+  //LOAD SESSION: send user email ->  respond with last session data associated -> updatea app.js state.session
+  sessionCall = () => {
 
-    //////////////////////////////////////
-    //LOAD SESSION: send user email ->  respond with last session data associated -> updatea app.js state.session
     fetch('http://localhost:9000/session-load',
       {
       method: 'put',
@@ -55,15 +62,19 @@ class Signin extends Component {
         email: this.state.signInEmail, //check if session exist for this email
         })
       })
-    .then(response => response.json())
+    .then(response => response.json()) //respond with session data from DB
     .then(session => {
-      if(session.email){
-        this.props.loadSession(session)
+      if(session.email){ //check that response is not an empty obj
+        // this.props.resetState();
+        this.props.loadSession(session); // pass session data to the App.js component
+        this.props.onRouteChange('home');
       }
     })
 
   }
-  
+
+
+
   render(){
 
     return(

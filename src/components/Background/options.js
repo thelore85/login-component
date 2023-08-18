@@ -2,14 +2,14 @@
 const Options = {
     background: {
         color: {
-            value: "#35a1ff",
+            // value: "#35a1ff",
         },
     },
-    fpsLimit: 120,
+    fpsLimit: 60,
     interactivity: {
         events: {
             onClick: {
-                enable: true,
+                enable: false,
                 mode: "push",
             },
             onHover: {
@@ -20,11 +20,11 @@ const Options = {
         },
         modes: {
             push: {
-                quantity: 8,
+                quantity: 7,
             },
             repulse: {
                 distance: 200,
-                duration: 0.4,
+                duration: 0.1,
             },
         },
     },
@@ -46,13 +46,13 @@ const Options = {
                 default: "bounce",
             },
             random: false,
-            speed: 1,
+            speed: 0.5,
             straight: false,
         },
         number: {
             density: {
                 enable: true,
-                area: 800,
+                area: 900,
             },
             value: 200,
         },
@@ -60,7 +60,7 @@ const Options = {
             value: 0.5,
         },
         shape: {
-            type: "circle",
+            type: "square",
         },
         size: {
             value: { min: 1, max: 5 },

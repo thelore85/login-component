@@ -27,10 +27,8 @@ let IMAGE_URL = '';
 
 ///////////////////////////////////
 // Constructor
-class App extends Component{
-  constructor(){
-    super();
-    this.state = {
+
+const initialState = {
       url: '',
       boxCoordinates: {},
       route: 'signin',
@@ -45,14 +43,20 @@ class App extends Component{
         email: '',
         entries: 0,
         sessions: 1,
-        last_login: new Date,
-        img_search: ['maker your fist img detection!'],
+        last_login: 1,
+        img_search: [],
         sessions: 0
       }
     }
+
+class App extends Component{
+  
+  //set the constructor
+  constructor(){
+    super();
+    this.state = initialState;
   }
 
-  /////////////////////////////////
   // API call: Image recognition
   onSearchClick = () => {
 
@@ -75,48 +79,20 @@ class App extends Component{
 
     //run api prediction
      fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/outputs", requestOptions)
-      .then(response => {return response.text()})
-      .then(result => this.faceDetection((this.calculateFaceBox(JSON.parse(result)))))
-      .then(console.log)
-      .catch(error => console.log('Api load error', error)); // returning the prediction and the sqaure details
-
-      this.setSession();
-    }
-    
-    //////////////////////////////
-    // push Session to the db
-    setSession = () => {
-    
-    // delate last img in the array
-    if(this.state.session.img_search.length >=10){
-      this.state.session.img_search.pop();
-    }
-
-    // add img to state session img_search array
-    this.state.session.img_search.unshift(IMAGE_URL); 
-
-    //update session state
-    this.setState({
-      session: {
-        ...this.state.session,
-        entries: Number(this.state.session.entries) + 1
-      }
-    })
-
-
-    //send the new session state to the db
-    fetch('http://localhost:9000/session-update',
-      {
-        method: 'put',
-        headers: {'Content-Type' : 'application/json'},
-        body: JSON.stringify({
-          email: this.state.user.email,
-          last_login: new Date,
-          img_search: this.state.session.img_search,
-          entries: this.state.session.entries++
-        })
+      .then(response => {
+        if(response.ok){
+          this.uploadSession();
+          return response.text()
+        }
       })
-      .then(console.log)
+      .then(result => this.faceDetection((this.calculateFaceBox(JSON.parse(result)))))// returning the prediction and the sqaure details
+      .catch(error => console.log('ERROR: CLARIFY API')); 
+
+  }
+
+  //reset state after new user login
+  resetState = () => {
+    this.setState( initialState )
   }
 
   ////////////////////////////////
@@ -156,15 +132,15 @@ class App extends Component{
   };
 
   //ROUTING management
-  onRouteChange = (route) => {
+  onRouteChange = (newRoute) => {
 
-    //GET route parameter (click interaction)
+    //SET newRoute parameter after click interaction
     this.setState({ 
-      route: route
+      route: newRoute
     })
 
-    // assign isSignIn state based on route parameter (click interaction)
-    if(route === 'signin' || route === 'register'){
+    // assign isSignIn state based on newRoute parameter (click interaction)
+    if(newRoute === 'signin' || newRoute === 'register'){
       this.setState({
         isSignIn: false
       })
@@ -188,19 +164,49 @@ class App extends Component{
     });
   }
 
-  //get data from signin/register component and push to state - OK
+  // UPDATE session state with url search AND update DB with new session data
+  uploadSession = () => {
+  
+    // delate last img in the array
+    if(this.state.session.img_search.length >=10){
+      this.state.session.img_search.pop();
+    }
+  
+    // add img on top of the img_search array
+    this.state.session.img_search.unshift(IMAGE_URL); 
+  
+    //update entries value
+    let newEntries = Number(this.state.session.entries) + 1
+
+  
+    //send the new session state to the db
+    fetch('http://localhost:9000/session-update',
+      {
+        method: 'put',
+        headers: {'Content-Type' : 'application/json'},
+        body: JSON.stringify({
+          email: this.state.user.email,
+          last_login: new Date(),
+          img_search: this.state.session.img_search,
+          entries: newEntries
+        })
+      })
+      .then(response => response.json())
+      .then(session => this.loadSession(session))
+    }
+
+  //get data from server: session-update / session-post and update App.js state
   loadSession = (data) => {
     this.setState({
       session: {
         email: data.email,
         entries: data.entries,
-        last_login: data.last_login,
+        last_login: new Date(data.last_login).toLocaleDateString('it-IT'),
         img_search: data.img_search
       }
     })
   }
 
-  ///////////////////////////////////
   // on load page
   componentDidMount(){  
   }
@@ -218,8 +224,8 @@ class App extends Component{
           ? <Main user={this.state.user} session={this.state.session} onSearchClick={this.onSearchClick} onInputChange={this.onInputChange} url={this.state.url} box={this.state.boxCoordinates}/>
           : (
             this.state.route === 'signin'
-            ?<Signin loadUser={this.loadUser} loadSession={this.loadSession} onRouteChange={this.onRouteChange}/>
-            :<Register loadUser={this.loadUser} loadSession={this.loadSession} onRouteChange={this.onRouteChange} />
+            ?<Signin loadUser={this.loadUser} loadSession={this.loadSession} onRouteChange={this.onRouteChange} resetState={this.resetState}/>
+            :<Register loadUser={this.loadUser} loadSession={this.loadSession} onRouteChange={this.onRouteChange} resetState={this.resetState}/>
           )
         }
 				  <Footer />

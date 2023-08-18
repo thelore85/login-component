@@ -37,7 +37,7 @@ class Register extends Component {
 
 
       ////////////////////////////////////////////////////////
-      //CREATE NEW USER RECORD -> return user info -> upload app.js state.user
+      //CREATE NEW USER RECORD -> return user info -> upload app.js state.user =OK
       fetch('http://localhost:9000/register',
       {
         method: 'post',
@@ -51,8 +51,9 @@ class Register extends Component {
       .then(response => response.json())
       .then(user => {
         if(user.id){ //check if db respond with a user --> user exist
-          this.props.onRouteChange('home');
+          this.props.resetState();
           this.props.loadUser(user);
+          this.props.onRouteChange('home');
         }
         else{console.log('ALERT: registration data not valid')}
       })
@@ -67,7 +68,7 @@ class Register extends Component {
       headers: {'Content-Type' : 'application/json'},
       body: JSON.stringify({
         email: this.state.email,
-        last_login : new Date,
+        last_login: new Date(),
         img_search: [],
         entries: 0,
         sessions: 1
@@ -79,30 +80,6 @@ class Register extends Component {
         this.props.loadSession(session)}
       else{console.log('session load: error')}
     })
-
-
-
-    // //////////////////////////////////////
-    // //session get request -> update last session data and return it
-    // fetch('http://localhost:9000/session-update',
-    //   {
-    //   method: 'put',
-    //   headers: {'Content-Type' : 'application/json'},
-    //   body: JSON.stringify({
-    //     email: this.state.email,
-    //     last_login : new Date,
-    //     img_search: this.props.img_search,
-    //     entries: this.props.entries
-    //     })
-    //   })
-    // .then(response => response.json())
-    // .then(session => {
-    //   if(session.email){
-    //     this.props.loadSession(session)}
-    //   else{console.log('session load: error')}
-    // })
-
-
 
     }
   }
