@@ -25,7 +25,7 @@ let IMAGE_URL = '';
 ///////////////////////////////////////////////
 
 
-///////////////////////////////////
+/////////////////////////////////////
 // Constructor
 
 const initialState = {
@@ -37,7 +37,7 @@ const initialState = {
           id: '',
           name: '',
           email: '',
-          joined: ''
+          joined: '',
         },
       session: {
         email: '',
