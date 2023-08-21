@@ -20,11 +20,11 @@ const Options = {
         },
         modes: {
             push: {
-                quantity: 7,
+                quantity: 0.5,
             },
             repulse: {
-                distance: 200,
-                duration: 0.1,
+                distance: 30,
+                duration: 0.5,
             },
         },
     },
@@ -34,9 +34,9 @@ const Options = {
         },
         links: {
             color: "#ffffff",
-            distance: 150,
+            distance: 130,
             enable: true,
-            opacity: 0.5,
+            opacity: 0.7,
             width: 1,
         },
         move: {
@@ -54,13 +54,13 @@ const Options = {
                 enable: true,
                 area: 900,
             },
-            value: 200,
+            value: 170,
         },
         opacity: {
             value: 0.5,
         },
         shape: {
-            type: "square",
+            type: "triangle",
         },
         size: {
             value: { min: 1, max: 5 },

@@ -15,7 +15,9 @@ module.exports ={
     hot: true,
     server: { type: 'http' }
 	},
-
+  resolve: {
+    modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+  },
 	plugins:[
 		new HTMLWebpackPlugin({ 
       inject: true,
