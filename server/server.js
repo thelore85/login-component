@@ -30,14 +30,24 @@ app.listen(port, ()=>{ console.log('app is running on: ', port) })
 // DATABASE CONNECTION 
 
 // PostgreSql connection
+// const db = knex({
+//   client: 'pg',
+//   connection: {
+//     host : 'dpg-cjhj3vc1ja0c73dh7610-a.frankfurt-postgres.render.com',
+//     port : 5432,
+//     user : 'thelore85',
+//     password : 'N2zm1sEqRlk9OQZctjwWsJlqdxTHGXR6',
+//     database : 'image_recognition_um7l'
+//   }
+// });
+
 const db = knex({
   client: 'pg',
   connection: {
-    host : 'dpg-cjhj3vc1ja0c73dh7610-a.frankfurt-postgres.render.com',
-    port : 5432,
-    user : 'thelore85',
-    password : 'N2zm1sEqRlk9OQZctjwWsJlqdxTHGXR6',
-    database : 'image_recognition_um7l'
+    connectionString: 'postgres://thelore85:N2zm1sEqRlk9OQZctjwWsJlqdxTHGXR6@dpg-cjhj3vc1ja0c73dh7610-a.frankfurt-postgres.render.com/image_recognition_um7l',
+    ssl: {
+      rejectUnauthorized: false // Per consentire la connessione SSL
+    }
   }
 });
 
