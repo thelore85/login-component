@@ -59,20 +59,6 @@ const db = knex({
 
 
 
-// console.log(  process.env.DB_HOST, process.env.DB_PORT, process.env.DB_USER, process.env.DB_PSW, process.env.DB_NAME)
-
-// const db = knex({
-//   client: 'pg',
-//   connection: {
-//     connectionString: 'postgres://thelore85:N2zm1sEqRlk9OQZctjwWsJlqdxTHGXR6@dpg-cjhj3vc1ja0c73dh7610-a.frankfurt-postgres.render.com/image_recognition_um7l',
-//     ssl: {
-//       rejectUnauthorized: false,
-//     }
-//   }
-// });
-
-
-
 
 //////////////////////////////////////////////////////
 //////// ---------   END POINTS  --------------------

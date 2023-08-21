@@ -19,7 +19,7 @@ const Main = ({ user, session, onSearchClick, onInputChange, url, box, }) => {
 					<p>Last access: {session.last_login}</p>
 					<p>Image ulr:</p>
           <ol>
-              {session.img_search.map((url, i) => {return <li key={i}>{url}</li>})}
+              {/* {session.img_search.map((url, i) => {return <li key={i}>{url}</li>})} */}
           </ol>
         </div>
 		</section>
