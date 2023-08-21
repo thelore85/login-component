@@ -44,6 +44,7 @@ class Signin extends Component {
       if(user.id){
         this.props.resetState();
         this.props.loadUser(user);
+        this.props.onRouteChange('home');
         this.sessionCall();
       }
     })
@@ -67,7 +68,7 @@ class Signin extends Component {
       if(session.email){ //check that response is not an empty obj
         // this.props.resetState();
         this.props.loadSession(session); // pass session data to the App.js component
-        this.props.onRouteChange('home');
+
       }
     })
 

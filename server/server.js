@@ -33,15 +33,44 @@ app.listen(port, ()=>{ console.log('app is running on: ', port) })
 const db = knex({
   client: 'pg',
   connection: {
-    connectionString: process.env.DB_CONNECTION,
-    host : process.env.DB_HOST,
+    connectionString: 'postgres://thelore85:N2zm1sEqRlk9OQZctjwWsJlqdxTHGXR6@dpg-cjhj3vc1ja0c73dh7610-a/image_recognition_um7l',
+    host : 'dpg-cjhj3vc1ja0c73dh7610-a.frankfurt-postgres.render.com',
     port : 5432,
-    user : process.env.DB_USER,
-    password : process.env.DB_PSW,
-    database : process.env.DB_NAME,
+    user : 'thelore85',
+    password : 'N2zm1sEqRlk9OQZctjwWsJlqdxTHGXR6',
+    database : 'image_recognition_um7l',
     ssl: { rejectUnauthorized: false },
   }
 });
+
+// //PostgreSql connection
+// const db = knex({
+//   client: 'pg',
+//   connection: {
+//     connectionString: process.env.DB_CONNECTION,
+//     host : process.env.DB_HOST,
+//     port : 5432,
+//     user : process.env.DB_USER,
+//     password : process.env.DB_PSW,
+//     database : process.env.DB_NAME,
+//     ssl: { rejectUnauthorized: false },
+//   }
+// });
+
+
+
+// console.log(  process.env.DB_HOST, process.env.DB_PORT, process.env.DB_USER, process.env.DB_PSW, process.env.DB_NAME)
+
+// const db = knex({
+//   client: 'pg',
+//   connection: {
+//     connectionString: 'postgres://thelore85:N2zm1sEqRlk9OQZctjwWsJlqdxTHGXR6@dpg-cjhj3vc1ja0c73dh7610-a.frankfurt-postgres.render.com/image_recognition_um7l',
+//     ssl: {
+//       rejectUnauthorized: false,
+//     }
+//   }
+// });
+
 
 
 
