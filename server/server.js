@@ -38,7 +38,7 @@ const db = knex({
     user : 'thelore85',
     password : 'N2zm1sEqRlk9OQZctjwWsJlqdxTHGXR6',
     database : 'image_recognition_um7l',
-    ssl: true,
+    // ssl: true,
   }
 });
 
