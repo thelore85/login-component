@@ -20,10 +20,10 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-const host = 'dpg-cjhj3vc1ja0c73dh7610-a.frankfurt-postgres.render.com'
 
 // server launch
-app.listen(host, ()=>{ console.log('app is running on: ', host) })
+const port = process.env.PORT || 9000;
+app.listen(port, ()=>{ console.log('app is running on: ', port) })
 
 
 ///////////////////////////////
@@ -37,7 +37,7 @@ const db = knex({
     port : 5432, //default port psql
     user : ' thelore85',
     password : 'N2zm1sEqRlk9OQZctjwWsJlqdxTHGXR6',
-    database : 'image_recognition_um7l' // db name 
+    database : 'image_recognition' // db name 
   }
 });
 
