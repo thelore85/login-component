@@ -91,7 +91,7 @@ app.post('/register', (req,res) => {
     data_creation: new Date().toLocaleString(),
   })
   .then(user => res.json(user[0]))
-  .catch(err => res.status(400).json('impossibile to register:', err))
+  .catch(err => res.status(400).json({ message: 'impossibile to register', error: err }))
 
 })
 
