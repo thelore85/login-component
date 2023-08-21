@@ -33,14 +33,28 @@ app.listen(port, ()=>{ console.log('app is running on: ', port) })
 const db = knex({
   client: 'pg',
   connection: {
-    host : process.env.DB_HOST,
-    port : process.env.DB_PORT,
-    user : process.env.DB_USER,
-    password : process.env.DB_PSW,
-    database : process.env.DB_NAME,
+    host : 'dpg-cjhj3vc1ja0c73dh7610-a.frankfurt-postgres.render.com',
+    port : 5432,
+    user : 'thelore85',
+    password : 'N2zm1sEqRlk9OQZctjwWsJlqdxTHGXR6',
+    database : 'image_recognition_um7l',
     ssl: true,
   }
 });
+
+
+// //PostgreSql connection
+// const db = knex({
+//   client: 'pg',
+//   connection: {
+//     host : process.env.DB_HOST,
+//     port : process.env.DB_PORT,
+//     user : process.env.DB_USER,
+//     password : process.env.DB_PSW,
+//     database : process.env.DB_NAME,
+//     ssl: true,
+//   }
+// });
 
 // console.log(  process.env.DB_HOST, process.env.DB_PORT, process.env.DB_USER, process.env.DB_PSW, process.env.DB_NAME)
 
