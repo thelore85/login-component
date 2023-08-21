@@ -78,8 +78,9 @@ class Register extends Component {
     .then(session => {
       if(session.email){
         this.props.loadSession(session)}
-      else{console.log('session load: error')}
+      else{console.log('session post: error')}
     })
+    .catch(err => console.log('ERROR: session-post'))
 
     }
   }

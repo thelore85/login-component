@@ -37,7 +37,7 @@ const db = knex({
     port : 5432, //default port psql
     user : 'thelore85',
     password : 'N2zm1sEqRlk9OQZctjwWsJlqdxTHGXR6',
-    database : 'image_recognition_um7l' // db name 
+    database : 'image_recognition' // db name 
   }
 });
 
