@@ -37,7 +37,7 @@ class Register extends Component {
 
 
       ////////////////////////////////////////////////////////
-      //CREATE NEW USER RECORD -> return user info -> upload app.js state.user =OK
+      //CREATE NEW USER RECORD -> return user info -> upload app.js state.user
       fetch('https://face-recognition-server-ii6i.onrender.com/register',
       {
         method: 'post',
