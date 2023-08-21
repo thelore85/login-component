@@ -29,7 +29,7 @@ app.listen(port, ()=>{ console.log('app is running on: ', port) })
 ///////////////////////////////
 // DATABASE CONNECTION 
 
-PostgreSql connection
+//PostgreSql connection
 const db = knex({
   client: 'pg',
   connection: {
