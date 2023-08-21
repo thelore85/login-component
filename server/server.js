@@ -33,12 +33,13 @@ app.listen(port, ()=>{ console.log('app is running on: ', port) })
 const db = knex({
   client: 'pg',
   connection: {
-    host : 'dpg-cjhj3vc1ja0c73dh7610-a.frankfurt-postgres.render.com',
+    connectionString: 'postgres://thelore85:N2zm1sEqRlk9OQZctjwWsJlqdxTHGXR6@dpg-cjhj3vc1ja0c73dh7610-a/image_recognition_um7l',
+    host : 'dpg-cjhj3vc1ja0c73dh7610-a',
     port : 5432,
     user : 'thelore85',
     password : 'N2zm1sEqRlk9OQZctjwWsJlqdxTHGXR6',
     database : 'image_recognition_um7l',
-    // ssl: true,
+    ssl: { rejectUnauthorized: false },
   }
 });
 
