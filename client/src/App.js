@@ -197,6 +197,8 @@ class App extends Component{
 
   //get data from server: session-update / session-post and update App.js state
   loadSession = (data) => {
+    console.log('DEBUGGIN -app.js - loadSession fun: ', data)
+    
     this.setState({
       session: {
         email: data.email,

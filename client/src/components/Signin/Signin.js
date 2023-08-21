@@ -68,7 +68,6 @@ class Signin extends Component {
       if(session.email){ //check that response is not an empty obj
         // this.props.resetState();
         this.props.loadSession(session); // pass session data to the App.js component
-
       }
     })
 
