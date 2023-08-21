@@ -6,7 +6,7 @@
   "author": "Piqus",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "node server.js"
   },
   "dependencies": {
     "bcrypt-nodejs": "^0.0.3",
