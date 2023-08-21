@@ -91,7 +91,7 @@ app.post('/register', (req,res) => {
     data_creation: new Date().toLocaleString(),
   })
   .then(user => res.json(user[0]))
-  .catch(err => res.status(400).json({ message: 'impossibile to register', error: err }))
+  .catch(err => res.status(400).json({ message: 'ERROR: /register - impossibile to register', error: err }))
 
 })
 
@@ -118,7 +118,7 @@ app.post('/session-post', (req,res) =>{
       return res.json(session[0])
     }
   )
-  .catch(err => res.status(400).json('impossibile to register:', err))
+  .catch(err => res.status(400).json({ message: 'ERROR: session-post', error: err }))
 
 })
 
@@ -141,7 +141,7 @@ app.put('/session-load', (req, res) =>{
         res.json(session[0])}
       else{ res.json({}) }
     })
-    .catch(err => res.status(400).json('ERROR: server /session-load no user match'))
+    .catch(err => res.status(400).json({ message: 'ERROR: session-load', error: err }))
 })
 
 
@@ -159,7 +159,7 @@ app.put('/session-update', (req, res) => {
   })
   .returning('*')
   .then(session => res.json(session[0])) // we don't really need it, we can use state in front end
-  .catch(err => res.status(400).json('ERROR: session-update /server'))  
+  .catch(err => res.status(400).json({ message: 'ERROR: session-update', error: err }))  
 
   });
 
