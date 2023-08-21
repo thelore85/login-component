@@ -34,10 +34,10 @@ const db = knex({
   client: 'pg',
   connection: {
     host : 'dpg-cjhj3vc1ja0c73dh7610-a.frankfurt-postgres.render.com',
-    port : 5432, //default port psql
+    port : 5432,
     user : 'thelore85',
     password : 'N2zm1sEqRlk9OQZctjwWsJlqdxTHGXR6',
-    database : 'image_recognition' // db name 
+    database : 'image_recognition_um7l'
   }
 });
 
