@@ -165,6 +165,8 @@ app.put('/session-load', (req, res) =>{
 //session update: update login DB after img detection (search click)
 app.put('/session-update', (req, res) => {
   const { email, last_login, img_search, entries } = req.body;
+
+  console.log('DEBUGGING: server - session-update ', img_search)
   
   db('sessions')
   .where({ email })
