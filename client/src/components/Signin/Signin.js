@@ -30,7 +30,7 @@ class Signin extends Component {
 
     //////////////////////////////////////////
     //CHECK USER: send login input data -> return user info -> updata app.js state.user
-    fetch('http://localhost:9000/signin',
+    fetch('https://face-recognition-server-ii6i.onrender.com/signin',
     {
       method: 'post',
       headers: {'Content-Type' : 'application/json'},
@@ -54,7 +54,7 @@ class Signin extends Component {
   //LOAD SESSION: send user email ->  respond with last session data associated -> updatea app.js state.session
   sessionCall = () => {
 
-    fetch('http://localhost:9000/session-load',
+    fetch('https://face-recognition-server-ii6i.onrender.com/session-load',
       {
       method: 'put',
       headers: {'Content-Type' : 'application/json'},

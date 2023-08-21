@@ -180,7 +180,7 @@ class App extends Component{
 
   
     //send the new session state to the db
-    fetch('http://localhost:9000/session-update',
+    fetch('https://face-recognition-server-ii6i.onrender.com/session-update',
       {
         method: 'put',
         headers: {'Content-Type' : 'application/json'},
