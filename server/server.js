@@ -41,6 +41,8 @@ const db = knex({
   }
 });
 
+console.log(  process.env.DB_HOST, process.env.DB_PORT, process.env.DB_USER, process.env.DB_PSW, process.env.DB_NAME)
+
 // const db = knex({
 //   client: 'pg',
 //   connection: {
