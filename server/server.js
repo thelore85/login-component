@@ -104,7 +104,7 @@ app.post('/session-post', (req,res) =>{
   const { email, img_search, entries, sessions } = req.body;
 
   // create a new login record for new user 
-  db('login')
+  db('sessions')
   .returning('*')
   .insert({
     email: email,
@@ -132,7 +132,7 @@ app.put('/session-load', (req, res) =>{
 
   // check db if user exist -> return user
   db.select('*')
-    .from('login')
+    .from('sessions')
     .where({ email })
     .increment('sessions', 1)
     .returning('*')
@@ -150,7 +150,7 @@ app.put('/session-load', (req, res) =>{
 app.put('/session-update', (req, res) => {
   const { email, last_login, img_search, entries } = req.body;
   
-  db('login')
+  db('sessions')
   .where({ email })
   .update({
     img_search: img_search,
