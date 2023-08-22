@@ -9,6 +9,7 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "@vercel/postgres": "^0.4.1",
     "bcrypt-nodejs": "^0.0.3",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
