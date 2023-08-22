@@ -1,0 +1,35 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "./server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/signin",
+      "dest": "/server.js"
+    },
+    {
+      "src": "/register",
+      "dest": "/server.js"
+    },
+    {
+      "src": "/session-post",
+      "dest": "/server.js"
+    },
+    {
+      "src": "/session-load",
+      "dest": "/server.js"
+    },
+    {
+      "src": "/session-update",
+      "dest": "/server.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/"
+    }
+  ]
+}
