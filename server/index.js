@@ -29,35 +29,14 @@ app.listen(port, ()=>{ console.log('app is running on: ', port) })
 ///////////////////////////////
 // DATABASE CONNECTION 
 
-// //set environmental variables
-// const dbHost = process.env.DB_HOST || 'localhost';
-// const dbPort = process.env.DB_PORT || 5432;
-// const dbName = process.env.DB_NAME || 'image_recognition';
-// const dbUser = process.env.DB_USER || '';
-// const dbPassword = process.env.DB_PSW || '';
-// const dbConnection = process.env.DB_CONNECTION || '';
-// const dbSSL = process.env.DB_SSL || 'true';
-
-// VERCEL VAR
-const dbSSL = process.env.DB_SSL || 'true';
-const dbConnectionInternal = process.env.DB_URL_NON_POOLING || '';
-const dbConnectionPrisma = process.env.DB_PRISMA_URL || '';
-const dbUser = process.env.DB_USER || '';
+// set environmental variables
 const dbHost = process.env.DB_HOST || 'localhost';
-const dbPassword = process.env.DB_PASSWORD || '';
 const dbName = process.env.DB_DATABASE || 'image_recognition';
-const dbConnection = process.env.DB_URL || '';
 const dbPort = process.env.DB_PORT || '5432';
-
-
-// Log the environmental variables
-console.log('DB_HOST:', dbHost);
-console.log('DB_PORT:', dbPort);
-console.log('DB_NAME:', dbName);
-console.log('DB_USER:', dbUser);
-console.log('DB_PASSWORD:', dbPassword);
-console.log('DB_CONNECTION:', dbConnection);
-console.log('DB_SSL:', dbSSL);
+const dbUser = process.env.DB_USER || '';
+const dbPassword = process.env.DB_PASSWORD || '';
+const dbConnection = process.env.DB_URL || '';
+const dbSSL = process.env.DB_SSL || '';
 
 //PostgreSql connection
 const db = knex({
@@ -72,7 +51,6 @@ const db = knex({
     ssl: dbSSL,
   }
 });
-
 
 
 //////////////////////////////////////////////////////

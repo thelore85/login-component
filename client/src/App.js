@@ -29,7 +29,7 @@ const serverUrlbuilder = () => {
 };
 
 serverUrlbuilder();
-console.log('ALERT - app running on server: ', serverUrl);
+console.log('ALERT - app running on server: 3000');
 
 
 // CLRAIFAI API NEW 
