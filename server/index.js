@@ -64,8 +64,26 @@ const db = knex({
 //signin: check user data --> return user to front end
 
 
-app.get('/signin', (req, res) => {
-  res.status(200).json('server responding on /register')
+/////////////////////////////////
+//signin: check user data --> return user to front end
+app.post('/signin', (req, res) => {
+  const { email, password } = req.body;
+
+  var hash = bcrypt.hashSync(password);
+
+
+  db.select('*')
+    .from('users')
+    .where({ email })
+    .andWhere(
+      bcrypt.compareSync( password , hash)
+    )
+    .then(user => {
+      if (user.length > 0) {
+        res.json(user[0]); // Restituisci il primo utente trovato
+      } else {
+        res.json({}); // res empty obj: to preserve front-end error (if undefined the fetch in signin compo. run error)
+      }
+    })
+    .catch(err => res.status(400).json('ERROR: server /signin'));
 });
-
-
