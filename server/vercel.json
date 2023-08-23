@@ -1,35 +1,16 @@
 {
-  "version": 2,
   "builds": [
     {
-      "src": "./functions.js",
+      "src": "./index.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
-    {
-      "src": "/signin",
-      "dest": "/functions.js"
-    },
-    {
-      "src": "/register",
-      "dest": "/functions.js"
-    },
-    {
-      "src": "/session-post",
-      "dest": "/functions.js"
-    },
-    {
-      "src": "/session-load",
-      "dest": "/functions.js"
-    },
-    {
-      "src": "/session-update",
-      "dest": "/functions.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/"
-    }
+    { "src": "/api/signin", "dest": "/index.js" },
+    { "src": "/api/register", "dest": "/index.js" },
+    { "src": "/api/session-post", "dest": "/index.js" },
+    { "src": "/api/session-load", "dest": "/index.js" },
+    { "src": "/api/session-update", "dest": "/index.js" },
+    { "src": "/(.*)", "dest": "/" }
   ]
 }
