@@ -64,6 +64,10 @@ const db = knex({
 //signin: check user data --> return user to front end
 
 
+app.get('/', (req, res) =>{
+  res.status(200).insert('server runningn on port:', port, 'DB: ', db)
+})
+
 /////////////////////////////////
 //signin: check user data --> return user to front end
 app.post('/signin', (req, res) => {
