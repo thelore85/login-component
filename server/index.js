@@ -91,8 +91,10 @@ app.post('/signin', (req, res) => {
   // .andWhere( bcrypt.compareSync( password , hash))
 
   db.select('*')
-    .from('users')
-    .where('email', email )
-    .then(records => res.status(200).json(records))
-    .catch(err => res.status(400).json('ERROR: server /signin', err));
+  .from('users')
+  .then(records => res.status(200).json(records))
+  .catch(err => res.status(400).json('ERROR: server /signin', err));
+
+
+
 });
