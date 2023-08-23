@@ -39,14 +39,14 @@ const dbPassword = process.env.DB_PSW || '';
 const dbConnection = process.env.DB_CONNECTION || '';
 const dbSSL = process.env.DB_SSL || 'true';
 
-// Log the environmental variables
-console.log('DB_HOST:', dbHost);
-console.log('DB_PORT:', dbPort);
-console.log('DB_NAME:', dbName);
-console.log('DB_USER:', dbUser);
-console.log('DB_PASSWORD:', dbPassword);
-console.log('DB_CONNECTION:', dbConnection);
-console.log('DB_SSL:', dbSSL);
+// // Log the environmental variables
+// console.log('DB_HOST:', dbHost);
+// console.log('DB_PORT:', dbPort);
+// console.log('DB_NAME:', dbName);
+// console.log('DB_USER:', dbUser);
+// console.log('DB_PASSWORD:', dbPassword);
+// console.log('DB_CONNECTION:', dbConnection);
+// console.log('DB_SSL:', dbSSL);
 
 //PostgreSql connection
 const db = knex({
@@ -74,7 +74,7 @@ const db = knex({
 
 
 app.get('/', (req, res) =>{
-  res.status(200).json(`server is up and running - port: ${port};`)
+  res.status(200).json(`server is up and running - live port: ${port};`)
 })
 
 
