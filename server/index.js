@@ -37,8 +37,16 @@ const dbName = process.env.DB_NAME || 'image_recognition';
 const dbUser = process.env.DB_USER || '';
 const dbPassword = process.env.DB_PSW || '';
 const dbConnection = process.env.DB_CONNECTION || '';
-const dbSSL = process.env.DB_SSL || '';
-const serverIP = process.env.VERCEL_IP || 'no variable';
+const dbSSL = process.env.DB_SSL || 'true';
+
+// Log the environmental variables
+console.log('DB_HOST:', dbHost);
+console.log('DB_PORT:', dbPort);
+console.log('DB_NAME:', dbName);
+console.log('DB_USER:', dbUser);
+console.log('DB_PASSWORD:', dbPassword);
+console.log('DB_CONNECTION:', dbConnection);
+console.log('DB_SSL:', dbSSL);
 
 //PostgreSql connection
 const db = knex({
