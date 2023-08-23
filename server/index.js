@@ -9,7 +9,7 @@
 // SERVER SETTING
 
 //set-up the server
-const express = require('express'); // server framework
+const express = require('express'); // server frame
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt-nodejs');
 const cors = require('cors');
