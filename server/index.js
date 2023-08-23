@@ -87,30 +87,18 @@ app.get('/', (req, res) =>{
 app.post('/signin', (req, res) => {
   const { email, password } = req.body;
 
-  var hash = bcrypt.hashSync(password);
-  
-  // res.status(200).json(`DEBUGGING: /signin - Req data: ${email} ${hash};`)
+  // var hash = bcrypt.hashSync(password);
+  // .andWhere( bcrypt.compareSync( password , hash))
 
   db.select('*')
     .from('users')
     .where({ email })
-    .andWhere(
-      bcrypt.compareSync( password , hash)
-    )
-    .then(login => {
-      console.log('debugging /signin: ', login)
-      res.json(login)
+    .then(user => {
+      if (user.length > 0) {
+        res.json(user[0]); // Restituisci il primo utente trovato
+      } else {
+        res.json({}); // res empty obj: to preserve front-end error (if undefined the fetch in signin compo. run error)
+      }
     })
-    .catch(err => res.status(400).json('ERROR: server /signin', err));
-
-
-    // .then(user => {
-    //   if (user.length > 0) {
-    //     res.json(user[0]); // Restituisci il primo utente trovato
-    //   } else {
-    //     res.json({}); // res empty obj: to preserve front-end error (if undefined the fetch in signin compo. run error)
-    //   }
-    // })
-    // .catch(err => res.status(400).json('ERROR: server /signin', err));
-
+    .catch(err => res.status(400).json('ERROR: server /signin'));
 });
