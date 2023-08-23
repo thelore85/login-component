@@ -70,8 +70,7 @@ app.get('/', (req, res) =>{
 })
 
 
-
-
+///////////////////////////////////////////////////////
 // SIGNIN ROUTE
 app.post('/api/signin', async (req, res) => {
   const { email, password } = req.body;
