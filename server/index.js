@@ -40,6 +40,8 @@ const dbConnection = process.env.DB_CONNECTION || '';
 const dbSSL = process.env.DB_SSL || '';
 const serverIP = process.env.VERCEL_IP || 'no variable';
 
+
+
 //PostgreSql connection
 const db = knex({
   client: 'pg',
@@ -66,7 +68,7 @@ const db = knex({
 
 
 app.get('/', (req, res) =>{
-  res.status(200).json(`server is up and running - port: ${port};`)
+  res.status(200).json(`server is up and running - live port: ${port};`)
 })
 
 /////////////////////////////////
