@@ -38,6 +38,7 @@ const dbUser = process.env.DB_USER || '';
 const dbPassword = process.env.DB_PSW || '';
 const dbConnection = process.env.DB_CONNECTION || '';
 const dbSSL = process.env.DB_SSL || '';
+const serverIP = process.env.VERCEL_IP || 'no variable';
 
 //PostgreSql connection
 const db = knex({
@@ -73,7 +74,7 @@ app.get('/', (req, res) =>{
 app.post('/signin', (req, res) => {
   const { email, password } = req.body;
 
-  res.status(200).json(`DEBUGGING: /signin - Req data: ${email} ${password};`)
+  res.status(200).json(`DEBUGGING: /signin - Req data: ${email} ${password}; IP DATA: ${serverIP}`)
 
   // var hash = bcrypt.hashSync(password);
 
