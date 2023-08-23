@@ -7,29 +7,14 @@
     }
   ],
   "routes": [
-    {
-      "src": "/api/signin",
-      "dest": "./index.js"
-    },
-    {
-      "src": "/api/register",
-      "dest": "./index.js"
-    },
-    {
-      "src": "/api/session-post",
-      "dest": "./index.js"
-    },
-    {
-      "src": "/api/session-load",
-      "dest": "./index.js"
-    },
-    {
-      "src": "/api/session-update",
-      "dest": "./index.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/"
-    }
+    { "src": "/api/signin", "dest": "/index.js" },
+    { "src": "/api/register", "dest": "/index.js" },
+    { "src": "/api/session-post", "dest": "/index.js" },
+    { "src": "/api/session-load", "dest": "/index.js" },
+    { "src": "/api/session-update", "dest": "/index.js" },
+    { "src": "/(.*)", "dest": "/" }
+  ],
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api" }
   ]
 }
