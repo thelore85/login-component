@@ -85,5 +85,5 @@ app.post('/signin', (req, res) => {
         res.json({}); // res empty obj: to preserve front-end error (if undefined the fetch in signin compo. run error)
       }
     })
-    .catch(err => res.status(400).json('ERROR: server /signin'));
+    .catch(err => res.status(400).json('ERROR: server /signin', err));
 });
