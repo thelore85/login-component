@@ -93,12 +93,6 @@ app.post('/signin', (req, res) => {
   db.select('*')
     .from('users')
     .where({ email })
-    .then(user => {
-      if (user.length > 0) {
-        res.json(user[0]); // Restituisci il primo utente trovato
-      } else {
-        res.json({}); // res empty obj: to preserve front-end error (if undefined the fetch in signin compo. run error)
-      }
-    })
-    .catch(err => res.status(400).json('ERROR: server /signin'));
+    .then(records => res.status(200).json(records))
+    .catch(err => res.status(400).json('ERROR: server /signin', err));
 });
