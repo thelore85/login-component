@@ -92,7 +92,7 @@ app.post('/signin', (req, res) => {
 
   db.select('*')
     .from('users')
-    .where({ email })
+    .where('email', email )
     .then(records => res.status(200).json(records))
     .catch(err => res.status(400).json('ERROR: server /signin', err));
 });
