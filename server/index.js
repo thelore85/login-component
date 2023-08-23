@@ -69,7 +69,7 @@ const db = knex({
 //////////////////////////////////////////////////////
 
 
-/////////////////////////////////
+///////////////////////////////// - RUNNING
 //main root: check user data --> return user to front end
 app.get('/', (req, res) =>{
   // res.status(200).json(`server is up and running - live port: ${port};`)
@@ -80,7 +80,7 @@ app.get('/', (req, res) =>{
 
 })
 
-/////////////////////////////////
+/////////////////////////////////  - RUNNING
 //signin: check user data --> return user to front end
 app.post('/signin', (req, res) => {
   const { email, password } = req.body;
@@ -105,7 +105,7 @@ app.post('/signin', (req, res) => {
 });
 
 
-/////////////////////////////////
+/////////////////////////////////  - RUNNING
 //register: add a user record -> return new user object
 app.post('/register', (req,res) => {
   
@@ -128,7 +128,7 @@ app.post('/register', (req,res) => {
 
 
 
-/////////////////////////////////////
+/////////////////////////////////////  - RUNNING
 //Session Post: create a new sessin record (only during registration) --> return session
 app.post('/session-post', (req,res) =>{
 
@@ -155,7 +155,7 @@ app.post('/session-post', (req,res) =>{
 })
 
 
-/////////////////////////////////////////// 
+/////////////////////////////////////////// - RUNNING
 // session load: load session after login -> send back session information to front-end
 app.put('/session-load', (req, res) =>{
 
@@ -177,12 +177,10 @@ app.put('/session-load', (req, res) =>{
 })
 
 
-//////////////////////////////////// 
+//////////////////////////////////// - RUNNING
 //session update: update login DB after img detection (search click)
 app.put('/session-update', (req, res) => {
   const { email, last_login, img_search, entries } = req.body;
-
-  console.log('DEBUGGING: server - session-update ', img_search)
   
   db('sessions')
   .where({ email })

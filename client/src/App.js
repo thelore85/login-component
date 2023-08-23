@@ -16,7 +16,7 @@ let input = '';
 //server environment
 export let serverUrl;
 const serverPort = 9000;
-const serverLive = "https://face-recognition-server-ii6i.onrender.com";
+const serverLive = "https://login-component-server.vercel.app";
 const serverLocal = `http://localhost:${serverPort}`
 
 const  appEnv = process.env.NODE_ENV || 'development';
