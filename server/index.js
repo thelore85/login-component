@@ -29,15 +29,26 @@ app.listen(port, ()=>{ console.log('app is running on: ', port) })
 ///////////////////////////////
 // DATABASE CONNECTION 
 
+// //set environmental variables
+// const dbHost = process.env.DB_HOST || 'localhost';
+// const dbPort = process.env.DB_PORT || 5432;
+// const dbName = process.env.DB_NAME || 'image_recognition';
+// const dbUser = process.env.DB_USER || '';
+// const dbPassword = process.env.DB_PSW || '';
+// const dbConnection = process.env.DB_CONNECTION || '';
+// const dbSSL = process.env.DB_SSL || 'true';
 
-//set environmental variables
-const dbHost = process.env.DB_HOST || 'localhost';
-const dbPort = process.env.DB_PORT || 5432;
-const dbName = process.env.DB_NAME || 'image_recognition';
+// VERCEL VAR
+const dbSSL = process.env.DB_SSL || 'true';
+const dbConnectionInternal = process.env.DB_URL_NON_POOLING || '';
+const dbConnectionPrisma = process.env.DB_PRISMA_URL || '';
 const dbUser = process.env.DB_USER || '';
-const dbPassword = process.env.DB_PSW || '';
-const dbConnection = process.env.DB_CONNECTION || '';
-const dbSSL = process.env.DB_SSL || '';
+const dbHost = process.env.DB_HOST || 'localhost';
+const dbPassword = process.env.DB_PASSWORD || '';
+const dbName = process.env.DB_DATABASE || 'image_recognition';
+const dbConnection = process.env.DB_URL || '';
+const dbPort = process.env.DB_PORT || '5432';
+
 
 // Log the environmental variables
 console.log('DB_HOST:', dbHost);
@@ -72,12 +83,7 @@ const db = knex({
 ///////////////////////////////// - RUNNING
 //main root: check user data --> return user to front end
 app.get('/', (req, res) =>{
-  // res.status(200).json(`server is up and running - live port: ${port};`)
-  
-  db.select('*')
-  .from('users')
-  .then(records => res.status(200).json(records))
-
+  res.status(200).json(`server is up and running - live port: ${port};`)
 })
 
 /////////////////////////////////  - RUNNING
