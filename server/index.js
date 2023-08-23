@@ -69,35 +69,25 @@ app.get('/', (req, res) =>{
   res.status(200).json(`server is up and running - port: ${port};`)
 })
 
-/////////////////////////////////
-//signin: check user data --> return user to front end
-app.post('/signin', (req, res) => {
+
+
+
+// SIGNIN ROUTE
+app.post('/api/signin', async (req, res) => {
   const { email, password } = req.body;
 
-  var hash = bcrypt.hashSync(password);
-  
-  // res.status(200).json(`DEBUGGING: /signin - Req data: ${email} ${hash};`)
+  try {
+    const user = await db.select('*')
+      .from('users')
+      .where({ email })
+      .first();
 
-  db.select('*')
-    .from('users')
-    .where({ email })
-    .andWhere(
-      bcrypt.compareSync( password , hash)
-    )
-    .then(login => {
-      console.log('debugging /signin: ', login)
-      res.json(login)
-    })
-    .catch(err => res.status(400).json('ERROR: server /signin', err));
-
-
-    // .then(user => {
-    //   if (user.length > 0) {
-    //     res.json(user[0]); // Restituisci il primo utente trovato
-    //   } else {
-    //     res.json({}); // res empty obj: to preserve front-end error (if undefined the fetch in signin compo. run error)
-    //   }
-    // })
-    // .catch(err => res.status(400).json('ERROR: server /signin', err));
-
+    if (user && bcrypt.compareSync(password, user.password)) {
+      res.json(user);
+    } else {
+      res.json({});
+    }
+  } catch (error) {
+    res.status(400).json({ message: 'ERROR: server /signin', error: error.message });
+  }
 });

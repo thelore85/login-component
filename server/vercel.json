@@ -8,24 +8,24 @@
   ],
   "routes": [
     {
-      "src": "/signin",
-      "dest": "/index.js"
+      "src": "/api/signin",
+      "dest": "./index.js"
     },
     {
-      "src": "/register",
-      "dest": "/index.js"
+      "src": "/api/register",
+      "dest": "./index.js"
     },
     {
-      "src": "/session-post",
-      "dest": "/index.js"
+      "src": "/api/session-post",
+      "dest": "./index.js"
     },
     {
-      "src": "/session-load",
-      "dest": "/index.js"
+      "src": "/api/session-load",
+      "dest": "./index.js"
     },
     {
-      "src": "/session-update",
-      "dest": "/index.js"
+      "src": "/api/session-update",
+      "dest": "./index.js"
     },
     {
       "src": "/(.*)",
