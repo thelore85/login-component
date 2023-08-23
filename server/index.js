@@ -74,9 +74,9 @@ app.get('/', (req, res) =>{
 app.post('/signin', (req, res) => {
   const { email, password } = req.body;
 
-  // res.status(200).json(`DEBUGGING: /signin - Req data: ${email} ${password}; IP DATA: ${serverIP}`)
-
   var hash = bcrypt.hashSync(password);
+  
+  // res.status(200).json(`DEBUGGING: /signin - Req data: ${email} ${hash};`)
 
   db.select('*')
     .from('users')
@@ -84,13 +84,20 @@ app.post('/signin', (req, res) => {
     .andWhere(
       bcrypt.compareSync( password , hash)
     )
-    .then(user => {
-      if (user.length > 0) {
-        res.json(user[0]); // Restituisci il primo utente trovato
-      } else {
-        res.json({}); // res empty obj: to preserve front-end error (if undefined the fetch in signin compo. run error)
-      }
+    .then(login => {
+      console.log('debugging /signin: ', login)
+      res.json(login)
     })
     .catch(err => res.status(400).json('ERROR: server /signin', err));
+
+
+    // .then(user => {
+    //   if (user.length > 0) {
+    //     res.json(user[0]); // Restituisci il primo utente trovato
+    //   } else {
+    //     res.json({}); // res empty obj: to preserve front-end error (if undefined the fetch in signin compo. run error)
+    //   }
+    // })
+    // .catch(err => res.status(400).json('ERROR: server /signin', err));
 
 });
