@@ -6,7 +6,7 @@
   "author": "Piqus",
   "license": "MIT",
   "scripts": {
-    "start": "node server.js"
+    "start": "node index.js"
   },
   "dependencies": {
     "@vercel/postgres": "^0.4.1",

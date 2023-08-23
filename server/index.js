@@ -65,7 +65,7 @@ const db = knex({
 
 
 app.get('/', (req, res) =>{
-  res.status(200).insert('server runningn on port:', port, 'DB: ', db)
+  res.status(200).json(`serve is up and running - port: ${port}; DB: ${dbConnection}`)
 })
 
 /////////////////////////////////
