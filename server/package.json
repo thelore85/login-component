@@ -2,7 +2,7 @@
   "name": "login-component-server",
   "version": "1.0.0",
   "description": "",
-  "main": "functions.js",
+  "main": "index.js",
   "author": "Piqus",
   "license": "MIT",
   "scripts": {
