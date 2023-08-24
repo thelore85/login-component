@@ -8,7 +8,7 @@
 //////////////////////////////////////
 // SERVER SETTING
 
-//set-up the server
+//set-up the server for deploy
 const express = require('express'); // server framework
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt-nodejs');
