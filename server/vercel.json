@@ -1,11 +1,11 @@
 {
   "builds": [
     {
-      "src": "./site/index.js",
+      "src": "./index.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
-    { "src": "/site/(.*)", "dest": "/" }
+    { "src": "/api/(.*)", "dest": "/" }
   ]
 }
