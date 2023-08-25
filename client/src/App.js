@@ -19,7 +19,7 @@ let input = '';
 
 export let serverUrl;
 const serverPort = 9000;
-const serverPath = '/api'
+const serverPath = '/site'
 const serverAdress = 'https://login-component-server.vercel.app';
 const serverLive = `${serverAdress}${serverPath}`;
 const serverLocal = `http://localhost:${serverPort}`
