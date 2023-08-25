@@ -56,9 +56,9 @@ const db = knex({
 //////////////////TESTING MULTY ROUTING
 
 
-// Importa e utilizza i moduli per i sotto-domini
-const loginComponent = require('./domains/component.js');
-app.use('/component', loginComponent);
+// // Importa e utilizza i moduli per i sotto-domini
+// const loginComponent = require('./domains/component.js');
+// app.use('/component', loginComponent);
 
 
 
