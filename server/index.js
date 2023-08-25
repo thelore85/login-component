@@ -66,7 +66,7 @@ app.get('/', (req, res) =>{
 
 /////////////////////////////////  - RUNNING
 //signin: check user data --> return user to front end
-app.post('/api/signin', (req, res) => {
+app.post('/login-component/signin', (req, res) => {
   const { email, password } = req.body;
 
   var hash = bcrypt.hashSync(password);
@@ -91,7 +91,7 @@ app.post('/api/signin', (req, res) => {
 
 /////////////////////////////////  - RUNNING
 //register: add a user record -> return new user object
-app.post('/api/register', (req,res) => {
+app.post('/login-component/register', (req,res) => {
   
   const { name, email, password } = req.body;
 
@@ -114,7 +114,7 @@ app.post('/api/register', (req,res) => {
 
 /////////////////////////////////////  - RUNNING
 //Session Post: create a new sessin record (only during registration) --> return session
-app.post('/api/session-post', (req,res) =>{
+app.post('/login-component/session-post', (req,res) =>{
 
   //retrive user input from fornt end
   const { email, img_search, entries, sessions } = req.body;
@@ -141,7 +141,7 @@ app.post('/api/session-post', (req,res) =>{
 
 /////////////////////////////////////////// - RUNNING
 // session load: load session after login -> send back session information to front-end
-app.put('/api/session-load', (req, res) =>{
+app.put('/login-component/session-load', (req, res) =>{
 
   //retrive user input from fornt end
   const { email } = req.body;
@@ -163,7 +163,7 @@ app.put('/api/session-load', (req, res) =>{
 
 //////////////////////////////////// - RUNNING
 //session update: update login DB after img detection (search click)
-app.put('/api/session-update', (req, res) => {
+app.put('/login-component/session-update', (req, res) => {
   const { email, last_login, img_search, entries } = req.body;
   
   db('sessions')
