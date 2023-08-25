@@ -53,7 +53,6 @@ const db = knex({
 });
 
 
-
 /////////////////////////////////
 //main root: check user data --> return user to front end
 app.get('/', (req, res) =>{
@@ -178,6 +177,8 @@ app.put('/login-component/session-update', (req, res) => {
 
 
 
+
+
 ////////////////////////////////////////////////////
 // -------- IMAGE-RECOGNITION ---------------------
 ///////////////////////////////////////////////////
@@ -186,5 +187,5 @@ app.put('/login-component/session-update', (req, res) => {
 //signin: check user data --> return user to front end
 app.post('/image-recognition/ciao', (req, res) => {
   const { email, password } = req.body;
-  res.json(`thsnk to say hello ${email}`); // res empty obj: to preserve front-end error (if undefined the fetch in signin compo. run error)
+  res.json(`thsnk to say hello ${email}`); 
 });
