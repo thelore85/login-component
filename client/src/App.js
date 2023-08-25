@@ -13,7 +13,10 @@ import './App.css';
 //global var
 let input = '';
 
-//server environment for deploy
+///////////////////////////////////////////
+// SERVER ENVIRONMENT
+//////////////////////////////////////////
+
 export let serverUrl;
 const serverPort = 9000;
 const serverLive = "https://login-component-server.vercel.app";
