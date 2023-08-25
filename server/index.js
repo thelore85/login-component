@@ -57,7 +57,7 @@ const db = knex({
 
 
 // Importa e utilizza i moduli per i sotto-domini
-const loginComponent = require('./domain/component.js');
+const loginComponent = require('./domains/component.js');
 app.use('/component', loginComponent);
 
 
