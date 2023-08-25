@@ -6,7 +6,6 @@
     }
   ],
   "routes": [
-    { "src": "/login-component/(.*)", "dest": "/" },
-    { "src": "/image-recognition/(.*)", "dest": "/" }
+    { "src": "/component-login/(.*)", "dest": "/" }
   ]
 }
