@@ -53,16 +53,36 @@ const db = knex({
 });
 
 
-//////////////////////////////////////////////////////
-//////// ---------   END POINTS  --------------------
-//////////////////////////////////////////////////////
+//////////////////TESTING MULTY ROUTING
 
 
-///////////////////////////////// - RUNNING
+// Importa e utilizza i moduli per i sotto-domini
+const loginComponent = require('./domain/component.js');
+app.use('/component', loginComponent);
+
+
+
+
+
+
+
+
+
+
+
+
+
+/////////////////////////////////
 //main root: check user data --> return user to front end
 app.get('/', (req, res) =>{
   res.status(200).json(`server is up and running - live port: ${port};`)
 })
+
+
+
+////////////////////////////////////////////////////
+// -------- LOGIN-COMPONENT -----------------------
+///////////////////////////////////////////////////
 
 /////////////////////////////////  - RUNNING
 //signin: check user data --> return user to front end
@@ -88,7 +108,6 @@ app.post('/login-component/signin', (req, res) => {
     .catch(err => res.status(400).json('ERROR: server /signin'));
 });
 
-
 /////////////////////////////////  - RUNNING
 //register: add a user record -> return new user object
 app.post('/login-component/register', (req,res) => {
@@ -109,8 +128,6 @@ app.post('/login-component/register', (req,res) => {
   .catch(err => res.status(400).json({ message: 'ERROR: /register - impossibile to register', error: err }))
 
 })
-
-
 
 /////////////////////////////////////  - RUNNING
 //Session Post: create a new sessin record (only during registration) --> return session
@@ -138,7 +155,6 @@ app.post('/login-component/session-post', (req,res) =>{
 
 })
 
-
 /////////////////////////////////////////// - RUNNING
 // session load: load session after login -> send back session information to front-end
 app.put('/login-component/session-load', (req, res) =>{
@@ -159,7 +175,6 @@ app.put('/login-component/session-load', (req, res) =>{
     })
     .catch(err => res.status(400).json({ message: 'ERROR: session-load', error: err }))
 })
-
 
 //////////////////////////////////// - RUNNING
 //session update: update login DB after img detection (search click)
