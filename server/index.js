@@ -68,10 +68,6 @@ app.use('/component', loginComponent);
 
 
 
-
-
-
-
 /////////////////////////////////
 //main root: check user data --> return user to front end
 app.get('/', (req, res) =>{
