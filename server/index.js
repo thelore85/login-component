@@ -60,7 +60,7 @@ const transporter = nodemailer.createTransport({
   secure: false,
   auth: {
     user:process.env.EMAIL_USER || "sradstudio@gmail.com", //use your email provider
-    pass: process.env.EMAIL_PSW || "hugr tiww gnnp nvbo",  //user your email psw
+    pass: process.env.EMAIL_PSW || "",  //user your email psw
   },
 });
 
