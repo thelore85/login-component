@@ -279,7 +279,7 @@ app.post("/project-marriage-ste/send-email", async (req, res) => {
     const mailOptions = {
       from: { name: `${name} ${lastname}`, address: email},
       to: ["ramona.stefano.sposi@gmail.com"],
-      subject: `${name} ${lastname} conferma: ${guest + 1} partecipanti totali. Num: ${phone}`,
+      subject: `Conferma: ${guest + 1} partecipanti totali. Num: ${phone}`,
       text: `${name} ${lastname} parteciperà all'evento insieme a ${guest} ospiti (totale ${guest + 1}) Dati di contatto: ${email}, ${phone}`,
     };
 
