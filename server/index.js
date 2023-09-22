@@ -4,6 +4,14 @@
 //////////////////////////////////////////////
 //////////////////////////////////////////////
 
+// HOW TO START THE SERVER
+// -- open the server folder
+// -- npm install
+// -- npm start 
+// -- check the console with the message !!!
+
+
+
 
 //////////////////////////////////////
 // SERVER SETTING
@@ -14,6 +22,7 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt-nodejs');
 const cors = require('cors');
 const knex = require('knex');  // db framework
+const nodemailer = require("nodemailer"); // Email provider
 
 // activate plug-ins
 const app = express();
@@ -26,12 +35,34 @@ const port = process.env.PORT || 9000;
 app.listen(port, ()=>{ console.log('app is running on: ', port) })
 
 
+
+//////////////////////////////////////
+// MAIL SETTING
+
+// Configura il middleware per il parsing del corpo della richiesta
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+// Configura il trasportatore SMTP per l'invio dell'email
+const transporter = nodemailer.createTransport({
+  service: "Gmail", // Puoi utilizzare il servizio email di tua scelta
+  host: 'smtp.gmail.com',
+  port: 587,
+  secure: false,
+  auth: {
+    user:process.env.EMAIL_USER || "sradstudio@gmail.com", //use your email provider
+    pass: process.env.EMAIL_PSW || "",  //user your email psw
+  },
+});
+
+
+
 ///////////////////////////////
 // DATABASE CONNECTION 
 
-// set environmental variables
+// set environmental variables || local server
 const dbHost = process.env.DB_HOST || 'localhost';
-const dbName = process.env.DB_DATABASE || 'image_recognition';
+const dbName = process.env.DB_DATABASE || 'image_recognition'; // remeber to set local name DB
 const dbPort = process.env.DB_PORT || '5432';
 const dbUser = process.env.DB_USER || '';
 const dbPassword = process.env.DB_PASSWORD || '';
@@ -56,8 +87,11 @@ const db = knex({
 /////////////////////////////////
 //main root: check user data --> return user to front end
 app.get('/', (req, res) =>{
-  res.status(200).json(`server is up and running - live port: ${port};`)
+  res.status(200).json(`SERVER START: up and running - live port: ${port};`)
 })
+
+
+
 
 
 
@@ -189,3 +223,93 @@ app.post('/image-recognition/ciao', (req, res) => {
   const { email, password } = req.body;
   res.json(`thsnk to say hello ${email}`); 
 });
+
+
+
+
+// ------------------------------------------------
+
+//////////////////////////////////////////////////////
+// ----------- MARRIAGE PROJECT --------------------
+//
+// - Set the App with '/project-marriage-ste' url rout
+///////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////
+// just a chec of the server
+app.get('/project-marriage-ste/', (req, res) => {
+  res.status(200).json(`server is up and running - live port: ${port};`)
+});
+
+
+
+////////////////////////////////////////////
+//// CONTACT FORM - verification and send-out
+
+app.post("/project-marriage-ste/send-email", async (req, res) => {
+  const { name, lastname, email, guest, phone } = req.body;
+
+  // Verifica che tutti i campi siano presenti e non vuoti o undefined 
+  if (
+    name.length >= 3 && 
+    lastname.length >= 3 && 
+    email.includes('@') && email.length >= 5 && 
+    typeof phone === 'number') {  
+      
+    //if ok, send the email
+    const mailOptions = {
+      from: { name: `${name} ${lastname}` },
+      to: ["ramona.stefano.sposi@gmail.com"],
+      subject: `Conferma: di ${guest + 1} partecipanti totali. Num: ${phone}`,
+      text: `${name} ${lastname} parteciperà all'evento insieme a ${guest} ospiti (totale ${guest + 1}) Dati di contatto: ${email}, ${phone}`,
+    };
+
+    try {
+      await transporter.sendMail(mailOptions);
+      console.log("Email sent succesfully!");
+      res.status(200).json({ message: "Email inviata con successo!" });
+    } catch (error) {
+      console.error("Errore: impossibile inviare l'email di conferma:", error);
+      res.status(500).json({ error: "Errore: impossibile inviare l'email di conferma." });
+    }
+
+  // in case inputs value are not valid
+  }else{ 
+    console.error("Err: double check your input data pls");
+    res.status(400).json({ error: "Ricontrolla i dati che hai inserito" });
+  }
+});
+
+
+
+
+
+
+
+
+// //////////////// EMAIL TESTING FRONT END
+
+// app.post("/project-marriage-ste/send-email", async (req, res) => {
+//   const { name, lastname, email, guest, phone } = req.body;
+
+//   if (
+//     name.length >= 3 && 
+//     lastname.length >= 3 && 
+//     email.includes('@','.') && email.length >= 5 && 
+//     typeof phone === 'number') {  
+
+//       res.status(200).json({ message: "Email inviata con successo!" });
+
+
+//     }else{
+//       console.error("Err: double check your input data pls");
+//       res.status(400).json({ error: "Ricontrolla i dati che hai inserito" });
+//     }
+
+
+// });
+
+/////////////END TESTING
+
+
+
