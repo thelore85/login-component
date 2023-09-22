@@ -13,6 +13,11 @@
 
 
 
+
+
+
+//==============================================
+
 //////////////////////////////////////
 // SERVER SETTING
 
@@ -36,6 +41,10 @@ app.listen(port, ()=>{ console.log('app is running on: ', port) })
 
 
 
+
+
+//==============================================
+
 //////////////////////////////////////
 // MAIL SETTING
 
@@ -51,11 +60,15 @@ const transporter = nodemailer.createTransport({
   secure: false,
   auth: {
     user:process.env.EMAIL_USER || "sradstudio@gmail.com", //use your email provider
-    pass: process.env.EMAIL_PSW || "",  //user your email psw
+    pass: process.env.EMAIL_PSW || "hugr tiww gnnp nvbo",  //user your email psw
   },
 });
 
 
+
+
+
+//==============================================
 
 ///////////////////////////////
 // DATABASE CONNECTION 
@@ -89,6 +102,14 @@ const db = knex({
 app.get('/', (req, res) =>{
   res.status(200).json(`SERVER START: up and running - live port: ${port};`)
 })
+
+
+
+
+
+
+
+
 
 
 
@@ -213,16 +234,10 @@ app.put('/component-login/session-update', (req, res) => {
 
 
 
-////////////////////////////////////////////////////
-// -------- IMAGE-RECOGNITION ---------------------
-///////////////////////////////////////////////////
 
-/////////////////////////////////  - RUNNING
-//signin: check user data --> return user to front end
-app.post('/image-recognition/ciao', (req, res) => {
-  const { email, password } = req.body;
-  res.json(`thsnk to say hello ${email}`); 
-});
+
+
+
 
 
 
@@ -249,6 +264,10 @@ app.get('/project-marriage-ste/', (req, res) => {
 app.post("/project-marriage-ste/send-email", async (req, res) => {
   const { name, lastname, email, guest, phone } = req.body;
 
+  function capitalizer(){
+    name[0]
+  }
+
   // Verifica che tutti i campi siano presenti e non vuoti o undefined 
   if (
     name.length >= 3 && 
@@ -258,7 +277,7 @@ app.post("/project-marriage-ste/send-email", async (req, res) => {
       
     //if ok, send the email
     const mailOptions = {
-      from: { name: `${name} ${lastname}` },
+      from: { name: `${name} ${lastname}`, address: email},
       to: ["ramona.stefano.sposi@gmail.com"],
       subject: `${name} ${lastname} conferma: ${guest + 1} partecipanti totali. Num: ${phone}`,
       text: `${name} ${lastname} parteciperà all'evento insieme a ${guest} ospiti (totale ${guest + 1}) Dati di contatto: ${email}, ${phone}`,
@@ -281,32 +300,20 @@ app.post("/project-marriage-ste/send-email", async (req, res) => {
 });
 
 
-
-
-
-
-
-
 // //////////////// EMAIL TESTING FRONT END
 
 // app.post("/project-marriage-ste/send-email", async (req, res) => {
 //   const { name, lastname, email, guest, phone } = req.body;
-
 //   if (
 //     name.length >= 3 && 
 //     lastname.length >= 3 && 
 //     email.includes('@','.') && email.length >= 5 && 
 //     typeof phone === 'number') {  
-
 //       res.status(200).json({ message: "Email inviata con successo!" });
-
-
 //     }else{
 //       console.error("Err: double check your input data pls");
 //       res.status(400).json({ error: "Ricontrolla i dati che hai inserito" });
 //     }
-
-
 // });
 
 /////////////END TESTING
