@@ -262,7 +262,7 @@ app.get('/project-marriage-ste/', (req, res) => {
 //// CONTACT FORM - verification and send-out
 
 app.post("/project-marriage-ste/send-email", async (req, res) => {
-  const { name, lastname, email, guest, phone, note } = req.body;
+  const { name, email, guest, phone, note } = req.body;
 
   function capitalizer(){
     name[0]
@@ -271,7 +271,6 @@ app.post("/project-marriage-ste/send-email", async (req, res) => {
   // Verifica che tutti i campi siano presenti e non vuoti o undefined 
   if (
     name.length >= 3 && 
-    lastname.length >= 3 && 
     email.includes('@') && email.length >= 5 && 
     typeof phone === 'number') {  
       
