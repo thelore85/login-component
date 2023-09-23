@@ -43,10 +43,13 @@ app.listen(port, ()=>{ console.log('app is running on: ', port) })
 
 
 
+
+
+
 //==============================================
 
 //////////////////////////////////////
-// MAIL SETTING
+// MAIL  SERVER SET-UP
 
 // Configura il middleware per il parsing del corpo della richiesta
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -68,6 +71,8 @@ const transporter = nodemailer.createTransport({
 
 
 
+
+
 //==============================================
 
 ///////////////////////////////
@@ -75,10 +80,10 @@ const transporter = nodemailer.createTransport({
 
 // set environmental variables || local server
 const dbHost = process.env.DB_HOST || 'localhost';
-const dbName = process.env.DB_DATABASE || 'image_recognition'; // remeber to set local name DB
+const dbName = process.env.DB_DATABASE || 'vercerlDb_local'; // remeber to set local name DB
 const dbPort = process.env.DB_PORT || '5432';
-const dbUser = process.env.DB_USER || '';
-const dbPassword = process.env.DB_PASSWORD || '';
+const dbUser = process.env.DB_USER || 'postgres';
+const dbPassword = process.env.DB_PASSWORD || 'dottore';
 const dbConnection = process.env.DB_URL || '';
 const dbSSL = process.env.DB_SSL || '';
 
@@ -257,16 +262,54 @@ app.get('/project-marriage-ste/', (req, res) => {
 });
 
 
+///////////////////////////////////
+//// MESSAGES - push the message to db and retrive the obj
+
+app.post( '/project-marriage-ste/push-message', (req, res) => {
+
+  // destructurin body
+  const { testo, data, user_type } = req.body;
+  
+  console.log(testo, data, user_type)
+
+  db('pj_marriage_mex')
+    .returning('*')
+    .insert({
+      testo: testo,
+      data: data,
+      user_type: user_type
+    })
+    .then( response => res.json(response))
+    .catch(err => res.status(400).json({ message: 'ERROR DB-CALL: /pushmessage ', error: err } ))  
+
+});
+
+///////////////////////////////////////////////////////////
+//// send database 
+
+// Aggiungi questa rotta GET al tuo server Express
+app.get('/project-marriage-ste/get-messages', (req, res) => {
+
+  db.select('*')
+    .from('pj_marriage_mex')
+    .then(data => {
+      // Invia i dati come risposta JSON
+      res.json(data);
+    })
+    .catch(err => {
+      // Gestisci gli errori in caso di problemi nella query
+      console.error('Errore nella richiesta GET:', err);
+      res.status(500).json({ message: 'Errore nella richiesta GET' });
+    });
+});
+
+
 
 ////////////////////////////////////////////
 //// CONTACT FORM - verification and send-out
 
 app.post("/project-marriage-ste/send-email", async (req, res) => {
   const { name, email, guest, phone, note } = req.body;
-
-  function capitalizer(){
-    name[0]
-  }
 
   // Verifica che tutti i campi siano presenti e non vuoti o undefined 
   if (
