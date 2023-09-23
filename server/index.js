@@ -262,7 +262,7 @@ app.get('/project-marriage-ste/', (req, res) => {
 //// CONTACT FORM - verification and send-out
 
 app.post("/project-marriage-ste/send-email", async (req, res) => {
-  const { name, lastname, email, guest, phone } = req.body;
+  const { name, lastname, email, guest, phone, note } = req.body;
 
   function capitalizer(){
     name[0]
@@ -280,7 +280,7 @@ app.post("/project-marriage-ste/send-email", async (req, res) => {
       from: { name: `${name} ${lastname}`, address: email},
       to: ["ramona.stefano.sposi@gmail.com"],
       subject: `Conferma: ${guest + 1} partecipanti totali. Num: ${phone}`,
-      text: `${name} ${lastname} parteciperà all'evento insieme a ${guest} ospiti (totale ${guest + 1}) Dati di contatto: ${email}, ${phone}`,
+      text: `${name} ${lastname} parteciperà all'evento insieme a ${guest} ospiti (totale ${guest + 1}) Dati di contatto: ${email}, ${phone}; RICHIESTE SPECIALI: ${note}`,
     };
 
     try {
