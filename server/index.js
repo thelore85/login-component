@@ -342,23 +342,69 @@ app.post("/project-marriage-ste/send-email", async (req, res) => {
 });
 
 
-// //////////////// EMAIL TESTING FRONT END
-
-// app.post("/project-marriage-ste/send-email", async (req, res) => {
-//   const { name, lastname, email, guest, phone } = req.body;
-//   if (
-//     name.length >= 3 && 
-//     lastname.length >= 3 && 
-//     email.includes('@','.') && email.length >= 5 && 
-//     typeof phone === 'number') {  
-//       res.status(200).json({ message: "Email inviata con successo!" });
-//     }else{
-//       console.error("Err: double check your input data pls");
-//       res.status(400).json({ error: "Ricontrolla i dati che hai inserito" });
-//     }
-// });
-
-/////////////END TESTING
 
 
 
+
+
+
+
+
+// ------------------------------------------------
+
+//////////////////////////////////////////////////////
+// ---------- PROMO CODE - NEW LEAD API --------------
+//
+// - CONNECT TO HUBSPOT API TO GENERATE THE LEAD 
+///////////////////////////////////////////////////////
+
+
+
+
+/////////////////////////////////////////////
+// SET HUBSPOT APP connection
+const YOUR_TOKEN = 'pat-eu1-a8e0e93a-5a87-458d-85e4-b9483366e03f'; // use your token
+const apiUrl = 'https://api.hubapi.com/crm/v3/objects/contacts';
+
+
+////////////////////////////////////////
+// PUSH DATA TO API
+
+app.post("/project-promo-code/new-lead", async (req, res) => {
+  const { firstname, email, promo_code } = req.body;
+
+  fetch(apiUrl, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${YOUR_TOKEN}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      properties: {
+        email: email,
+        firstname: firstname,
+        promo_code: promo_code,
+      },
+    })
+  })
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error('Errore nella risposta del server');
+    }
+    return response.text(); // Ottieni il testo della risposta
+  })
+  .then((data) => {
+    // Gestisci la risposta API qui
+    console.log('Dati ricevuti:', data);
+
+    // Invia una risposta al client come testo
+    res.status(200).json({message: 'Tks for submit your data, check your email for the code'});
+  })
+  .catch((error) => {
+    // Gestisci gli errori qui
+    console.error('Si è verificato un errore durante la richiesta API:', error);
+
+    // Invia una risposta di errore al client
+    res.status(500).json({error: 'Si è verificato un errore durante la richiesta API'});
+  });
+});
