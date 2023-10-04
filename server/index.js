@@ -367,7 +367,7 @@ app.get('/project-promo-code/', (req, res) => {
 
 /////////////////////////////////////////////
 // SET HUBSPOT APP connection
-const YOUR_TOKEN = process.env.HUBSPOT_TOKEN // || 'pat-eu1-a8e0e93a-5a87-458d-85e4-b9483366e03f';
+const YOUR_TOKEN = process.env.HUBSPOT_TOKEN || 'pat-eu1-a8e0e93a-5a87-458d-85e4-b9483366e03f';
 const apiUrl = 'https://api.hubapi.com/crm/v3/objects/contacts';
 
 
@@ -375,7 +375,7 @@ const apiUrl = 'https://api.hubapi.com/crm/v3/objects/contacts';
 // PUSH DATA TO API
 
 app.post("/project-promo-code/new-lead", async (req, res) => {
-  const { firstname, email, promo_code } = req.body;
+  const { firstname, email, promo_code, company } = req.body;
 
   fetch(apiUrl, {
     method: 'POST',
@@ -388,6 +388,7 @@ app.post("/project-promo-code/new-lead", async (req, res) => {
         email: email,
         firstname: firstname,
         promo_code: promo_code,
+        company: company
       },
     })
   })
@@ -404,6 +405,6 @@ app.post("/project-promo-code/new-lead", async (req, res) => {
   .catch((error) => {
     
     console.error('Si è verificato un errore durante la richiesta API:', error);
-    res.status(500).json({error: 'Si è verificato un errore durante la richiesta API'});
+    res.status(500).json({error: 'Server Error: Si è verificato un errore durante la richiesta API'});
   });
 });
