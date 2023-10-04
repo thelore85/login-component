@@ -367,7 +367,7 @@ app.get('/project-promo-code/', (req, res) => {
 
 /////////////////////////////////////////////
 // SET HUBSPOT APP connection
-const YOUR_TOKEN = process.env.HUBSPOT_TOKEN  // || 'pat-eu1-a8e0e93a-5a87-458d-85e4-b9483366e03f'; 
+const YOUR_TOKEN = 'pat-eu1-a8e0e93a-5a87-458d-85e4-b9483366e03f'; // process.env.HUBSPOT_TOKEN  || 
 const apiUrl = 'https://api.hubapi.com/crm/v3/objects/contacts';
 
 
