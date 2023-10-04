@@ -32,13 +32,16 @@ const nodemailer = require("nodemailer"); // Email provider
 // activate plug-ins
 const app = express();
 app.use(bodyParser.json());
-app.use(cors());
+
+// CORS - domain white list
+app.use(cors({
+  origin: 'https://project-promo-code.vercel.app',
+}));
 
 
 // server launch
 const port = process.env.PORT || 9000;
 app.listen(port, ()=>{ console.log('app is running on: ', port) })
-
 
 
 
