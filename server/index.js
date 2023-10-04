@@ -62,8 +62,8 @@ const transporter = nodemailer.createTransport({
   port: 587,
   secure: false,
   auth: {
-    user:process.env.EMAIL_USER || // for local host use string "sra...@gmail.com"
-    pass: process.env.EMAIL_PSW || //for local host use string "d..."
+    user:process.env.EMAIL_USER, // for local host use string "sra...@gmail.com"
+    pass: process.env.EMAIL_PSW  //for local host use string "d..."
   },
 });
 
@@ -82,8 +82,8 @@ const transporter = nodemailer.createTransport({
 const dbHost = process.env.DB_HOST || 'localhost';
 const dbName = process.env.DB_DATABASE || 'vercerlDb_local'; // remeber to set local name DB
 const dbPort = process.env.DB_PORT || '5432';
-const dbUser = process.env.DB_USER || //for local host use string "postgres"
-const dbPassword = process.env.DB_PASSWORD || //for local host use string "d..."
+const dbUser = process.env.DB_USER;//for local host use string "postgres"
+const dbPassword = process.env.DB_PASSWORD; //for local host use string "d..."
 const dbConnection = process.env.DB_URL || '';
 const dbSSL = process.env.DB_SSL || '';
 
