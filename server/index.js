@@ -361,11 +361,16 @@ app.post("/project-marriage-ste/send-email", async (req, res) => {
 // - CONNECT TO HUBSPOT API TO GENERATE THE LEAD 
 ///////////////////////////////////////////////////////
 
-////////////////////////////////////////////////////////
-// just a chec of the server
+
+
 app.get('/project-promo-code/', (req, res) => {
   res.status(200).json(`server is up and running - live port: ${port};`)
 });
+
+app.get('/project-marriage-sta/', (req, res) => {
+  res.status(200).json(`server is up and running - live port: ${port};`)
+});
+
 
 
 
