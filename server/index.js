@@ -264,6 +264,12 @@ app.get('/project-marriage-ste/', (req, res) => {
   res.status(200).json(`server is up and running - live port: ${port};`)
 });
 
+app.get('/project-marriage-sta/', (req, res) => {
+  res.status(200).json(`server is up and running - live port: ${port};`)
+});
+
+
+
 
 ///////////////////////////////////
 //// MESSAGES - push the message to db and retrive the obj
@@ -366,13 +372,6 @@ app.post("/project-marriage-ste/send-email", async (req, res) => {
 app.get('/project-promo-code/', (req, res) => {
   res.status(200).json(`server is up and running - live port: ${port};`)
 });
-
-app.get('/project-marriage-sta/', (req, res) => {
-  res.status(200).json(`server is up and running - live port: ${port};`)
-});
-
-
-
 
 /////////////////////////////////////////////
 // SET HUBSPOT APP connection
