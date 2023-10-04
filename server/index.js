@@ -33,10 +33,8 @@ const nodemailer = require("nodemailer"); // Email provider
 const app = express();
 app.use(bodyParser.json());
 
-// // CORS - domain white list
-// app.use(cors({
-//   origin: 'https://project-promo-code.vercel.app/',
-// }));
+// CORS - domain white list
+app.use(cors());
 
 
 // server launch
@@ -264,12 +262,6 @@ app.get('/project-marriage-ste/', (req, res) => {
   res.status(200).json(`server is up and running - live port: ${port};`)
 });
 
-app.get('/project-marriage-sta/', (req, res) => {
-  res.status(200).json(`server is up and running - live port: ${port};`)
-});
-
-
-
 
 ///////////////////////////////////
 //// MESSAGES - push the message to db and retrive the obj
@@ -375,7 +367,7 @@ app.get('/project-promo-code/', (req, res) => {
 
 /////////////////////////////////////////////
 // SET HUBSPOT APP connection
-const YOUR_TOKEN = 'pat-eu1-a8e0e93a-5a87-458d-85e4-b9483366e03f'; //process.env.HUBSPOT_TOKEN  || 
+const YOUR_TOKEN = process.env.HUBSPOT_TOKEN  // || 'pat-eu1-a8e0e93a-5a87-458d-85e4-b9483366e03f'; 
 const apiUrl = 'https://api.hubapi.com/crm/v3/objects/contacts';
 
 

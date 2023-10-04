@@ -8,5 +8,6 @@
   "routes": [
     { "src": "/component-login/(.*)", "dest": "/" },
     { "src": "/project-marriage-ste/(.*)", "dest": "/" }
+    { "src": "/project-promo-code/(.*)", "dest": "/" }
   ]
 }
