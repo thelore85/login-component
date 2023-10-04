@@ -62,8 +62,8 @@ const transporter = nodemailer.createTransport({
   port: 587,
   secure: false,
   auth: {
-    user:process.env.EMAIL_USER, // for local host use string "sra...@gmail.com"
-    pass: process.env.EMAIL_PSW  //for local host use string "d..."
+    user:process.env.EMAIL_USER, // || for local host use string "sra...@gmail.com"
+    pass: process.env.EMAIL_PSW  // || for local host use string "d..."
   },
 });
 
@@ -82,8 +82,8 @@ const transporter = nodemailer.createTransport({
 const dbHost = process.env.DB_HOST || 'localhost';
 const dbName = process.env.DB_DATABASE || 'vercerlDb_local'; // remeber to set local name DB
 const dbPort = process.env.DB_PORT || '5432';
-const dbUser = process.env.DB_USER;//for local host use string "postgres"
-const dbPassword = process.env.DB_PASSWORD; //for local host use string "d..."
+const dbUser = process.env.DB_USER; // || for local host use string "postgres"
+const dbPassword = process.env.DB_PASSWORD; // || for local host use string "d..."
 const dbConnection = process.env.DB_URL || '';
 const dbSSL = process.env.DB_SSL || '';
 
@@ -363,7 +363,7 @@ app.post("/project-marriage-ste/send-email", async (req, res) => {
 
 /////////////////////////////////////////////
 // SET HUBSPOT APP connection
-const YOUR_TOKEN = 'pat-eu1-a8e0e93a-5a87-458d-85e4-b9483366e03f'; // use your token
+const YOUR_TOKEN = process.env.HUBSPOT_TOKEN  // || 'pat-eu1-a8e0e93a-5a87-458d-85e4-b9483366e03f';
 const apiUrl = 'https://api.hubapi.com/crm/v3/objects/contacts';
 
 
@@ -391,20 +391,15 @@ app.post("/project-promo-code/new-lead", async (req, res) => {
     if (!response.ok) {
       throw new Error('Errore nella risposta del server');
     }
-    return response.text(); // Ottieni il testo della risposta
+    return response.json();
   })
   .then((data) => {
-    // Gestisci la risposta API qui
-    console.log('Dati ricevuti:', data);
-
-    // Invia una risposta al client come testo
+    console.log(data); // prind new lead info from HubS API
     res.status(200).json({message: 'Tks for submit your data, check your email for the code'});
   })
   .catch((error) => {
-    // Gestisci gli errori qui
+    
     console.error('Si è verificato un errore durante la richiesta API:', error);
-
-    // Invia una risposta di errore al client
     res.status(500).json({error: 'Si è verificato un errore durante la richiesta API'});
   });
 });
